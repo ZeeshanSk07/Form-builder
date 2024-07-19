@@ -1,0 +1,70 @@
+:root {
+  --white: rgba(255, 255, 255, 1);
+  --gray: rgba(255, 255, 255, 0.92);
+  --blue: rgba(26, 95, 255, 1);
+  --outfit: "Outfit";
+  --opensans: "Open Sans";
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  background-color: rgb(23, 25, 35);
+  font-family: var(--opensans);
+  color: var(--gray);
+}
+
+.specify {
+  width: 80%;
+  height: auto;
+  margin: auto;
+}
+
+.splitpage {
+  display: flex;
+  justify-content: space-between;
+
+  margin: 0 auto;
+  width: 75%;
+  justify-content: space-between;
+  margin-bottom: 12%;
+}
+.splitpage h2 {
+  color: var(--white);
+  font-family: var(--outfit);
+  font-size: 2rem;
+}
+
+.splitpage .img {
+  width: 100%;
+  height: auto;
+}
+.splitpage div:first-child {
+  margin-right: 50px;
+}
+
+.text {
+  margin-top: 4%;
+}
+.text p {
+  color: rgba(160, 174, 192, 1);
+}
+
+.logos img {
+  margin: 2% 5% 2% 5%;
+  width: 90%;
+  height: 30vh;
+}
+
+.logos h2,
+.logos p {
+  width: 38%;
+  font-family: var(--outfit);
+  margin-left: 12%;
+  margin-bottom: 10px;
+}
+.logos p {
+  color: rgba(160, 174, 192, 1);
+  font-family: var(--opensans);
+}
