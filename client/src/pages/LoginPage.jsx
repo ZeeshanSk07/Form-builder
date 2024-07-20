@@ -5,9 +5,28 @@ import semicircle from "../assets/login/Ellipse 1.png";
 import vercircle from "../assets/login/Ellipse 2.png";
 import triangle from "../assets/login/Group 2 (1).png";
 import { useNavigate } from "react-router-dom";
+import { Login } from '../api/User';
+import { useState } from "react";
 
 function LoginPage() {
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const navigate = useNavigate();
+
+  const handlelogin = async () => {
+    try {
+      const response = await Login(email, password);
+      console.log(response);
+      if (response.status === 200){
+        localStorage.setItem('token', response.data.token);
+      } else {
+        alert('Invalid email or password');
+      }
+    } catch (error) {
+      console.log('error');
+    }
+  }
   return (
     <>
       <div className="login">
@@ -16,12 +35,12 @@ function LoginPage() {
           <img src={triangle} alt="" />
           <div className="forms">
             <label htmlFor="email">Email</label>
-            <input type="email" placeholder="Enter your email" />
+            <input type="email" value={email} onChange={(e)=>setEmail(e.target.value)} placeholder="Enter your email" />
 
             <label htmlFor="password">Password</label>
-            <input type="password" placeholder="**********" />
+            <input type="password" value={password} onChange={(e)=>setPassword(e.target.value)} placeholder="**********" />
 
-            <button>Log In</button>
+            <button onClick={handlelogin}>Log In</button>
             <p>
               Don't have an account? <a href="/signup">Register now</a>
             </p>
