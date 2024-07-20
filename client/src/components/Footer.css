@@ -1,0 +1,24 @@
+
+
+.footer {
+    display: flex;
+    flex-direction: row;
+    color: #EDEDEE;
+    justify-content: space-evenly;
+    height: 30%;
+    padding: 2% 6% 4% 3%;
+    background-color: rgba(5, 5, 5, 0.252);
+    width: 100vw;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+a {
+    color: rgba(255, 255, 255, 0.92);
+    font-size: 1rem;
+}
+
