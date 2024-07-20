@@ -3,8 +3,10 @@ import img2 from "../../assets/attachment.png";
 import img1 from "../../assets/attachment2.png";
 import fig from "../../assets/Container.png";
 import "./Landing1.css";
+import { useNavigate } from "react-router-dom";
 
 function Landing1() {
+  const navigate = useNavigate();
   return (
     <>
       <div className="main">
@@ -19,7 +21,7 @@ function Landing1() {
               experiences. Embed them anywhere on your web/mobile apps and start
               collecting results like magic.
             </div>
-            <button>Create a FormBot for free</button>
+            <button onClick={() => navigate('/signup')}>Create a FormBot for free</button>
           </div>
           <div className="flexdiv">
             <img src={img2} alt="img" />

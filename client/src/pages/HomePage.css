@@ -11,13 +11,15 @@
     flex-direction: row;
     justify-content: space-between;
     padding: 2% 5%;
+    margin: 10px 0 0 10px;
     font-size: 1.4rem;
     font-family: var(--outfit);
     color: var(--white);
 }
 
 .header img{
-    width: 20%;margin: 10px 10px 0 0;
+    width: 20%;
+    margin: 0px 10px -5px 0;
 }
 .header span{
     margin: 0px 0 20px 0;

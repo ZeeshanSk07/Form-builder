@@ -4,12 +4,14 @@ import arrow from "../assets/login/arrow_back.png";
 import semicircle from "../assets/login/Ellipse 1.png";
 import vercircle from "../assets/login/Ellipse 2.png";
 import triangle from "../assets/login/Group 2 (1).png";
+import { useNavigate } from "react-router-dom";
 
 function LoginPage() {
+  const navigate = useNavigate();
   return (
     <>
       <div className="login">
-        <img src={arrow} alt="" />
+        <img onClick={()=>navigate(-1)} src={arrow} alt="" />
         <div className="middles">
           <img src={triangle} alt="" />
           <div className="forms">
@@ -21,7 +23,7 @@ function LoginPage() {
 
             <button>Log In</button>
             <p>
-              Don't have an account? <a href="">Register now</a>
+              Don't have an account? <a href="/signup">Register now</a>
             </p>
           </div>
           <img src={vercircle} alt="" />
