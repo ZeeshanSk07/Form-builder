@@ -67,4 +67,5 @@ body {
 .logos p {
   color: rgba(160, 174, 192, 1);
   font-family: var(--opensans);
+  margin-bottom: 8%;
 }

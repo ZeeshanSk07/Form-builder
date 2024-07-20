@@ -1,0 +1,110 @@
+:root {
+  --white: rgba(255, 255, 255, 1);
+  --gray: rgba(160, 174, 192, 1);
+  --blue: rgba(26, 95, 255, 1);
+  --outfit: "Outfit";
+  --opensans: "Open Sans";
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  background-color: rgb(23, 25, 35);
+  font-family: var(--opensans);
+  color: var(--gray);
+}
+
+.landing4 {
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  text-align: center;
+}
+.landing4 h1 {
+  font-size: 3rem;
+  margin-top: 6%;
+  font-family: var(--outfit);
+}
+
+.landing4 p {
+  font-size: 1.06rem;
+  line-height: 1.7;
+  font-family: var(--opensans);
+  margin-bottom: 2rem;
+  color: rgba(160, 174, 192, 1);
+}
+.landing4 span {
+  color: var(--white);
+}
+.landing4 img {
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  margin: 4% auto;
+  width: 35%;
+}
+
+.landing4bot {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  margin-top: 8%;
+}
+
+.landing4bot h2 {
+  font-size: 2.1rem;
+  font-family: var(--outfit);
+  color: var(--white);
+  margin-bottom: 0px;
+}
+.landing4bot p {
+  margin-top: 6px;
+}
+
+.boxes {
+  width: 100%;
+  height: auto;
+  display: flex;
+  padding: 5% 2%;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.boxes .graybox {
+  display: flex;
+  flex-direction: column;
+  padding: 0 1%;
+  width: 22%;
+  height: 180px;
+  margin-right: 3%;
+  margin-bottom: 3%;
+  background-color: rgba(26, 32, 44, 1);
+}
+
+.boxes img {
+  width: 25%;
+  margin: auto;
+  margin-bottom: 0px;
+}
+
+.graybox h3 {
+  color: var(--white);
+  margin: -20px 2px 15px 0px;
+}
+.graybox p {
+  color: rgba(160, 174, 192, 1);
+  font-size: 1rem;
+}
+.graybox .textbox {
+  margin-top: -9%;
+}
+
+.landing4bot h3 {
+  color: var(--white);
+}
+
+.companylogo {
+  margin-bottom: 5%;
+}
+.companylogo img {
+  margin: 2% 5% 2.5% 0;
+}
