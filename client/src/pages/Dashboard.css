@@ -19,44 +19,94 @@
     justify-content: center;
 }
 .headbox h3{
+    width: auto;
+    height: fit-content;
     border: solid 1px rgba(255, 255, 255, 0.16);
+    border-radius: 6px;
     padding: 0.45% 0.8%;
     font-size: 0.9rem;
     display: flex;
+    font-family: var(--opensans);
     align-content: baseline;
 }
 .headbox h3 img{
     margin: 3px 0 0 10px;
 }
 
+.dropdown-menu{
+    position: absolute;
+    cursor: pointer;
+    width: 10%;
+    border: solid 1px rgba(255, 255, 255, 0.16);
+    padding: 0.5% 0.8%;
+    display: flex;
+    flex-direction: column;
+    font-size: 0.9rem;
+    display: flex;
+    align-content: baseline;
+    margin-top: 26px;
+    margin-left: 25px;
+    border-radius: 6px;
+    background-color: rgb(23,25,35);
+}
+
+.dropdown-menu:last-child{
+    margin-top: 3.9%;
+    width: 3.6%;
+}
+
 .strip{
     display: flex;
     flex-direction: row;
-    flex-wrap: nowrap;
     padding-left: 18%;
     padding-top: 2.7%;
+    padding-right: 0%;
+    
 }
-.strip div:first-child{
-    display: flex;
-    width: 11.3%;
-}
-.strip div:first-child img{
-    width: 20%;
-    height: 80%;
-}
-.strip div:last-child img{
+.scrollstrip{
+    overflow-x:scroll; /* Enables horizontal scrolling */
+    white-space: nowrap;
+    scrollbar-width: none;
+    padding-right: 0;
     margin-right: 0;
-    margin-left: 7px;
-    width: 35%;
 }
+.createform{
+    display: flex;
+    width: 14%;
+    background-color: rgb(42,42,45);
+    border-radius: 8px;
+    align-items: center;
+    padding: 0.4% 0;
+}
+.createform img{
+    width: 15%;
+    height: 70%;
+    padding-left: 10px;
+}
+
+.stripbox{
+    width: fit-content;
+}
+.stripbox img{
+    margin-right: 4px;
+    margin-left: 7px;
+    width: 20px;
+}
+.stripbox{
+    display: flex;
+    flex-direction: row;
+    font-size: 1rem;
+    margin-right: 1.25rem;
+    background-color: rgb(42,42,45);
+    padding: 0.45% 1%;
+    border-radius: 6px;
+}
+
 
 .strip div{
     display: flex;
     flex-direction: row;
     font-size: 1rem;
-    background-color: rgb(42,42,45);
-    padding: 0.45% 1%;
-    border-radius: 6px;
     margin-right: 1.25rem;
 }
 
@@ -64,17 +114,19 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: 1.5% 18%;
+    padding: 1.5% 1% 1.5% 18%;
+    flex-wrap: wrap;
 }
 .typebot div{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 20%;
+    width: 16vw;
     border-radius: 6px;
-    margin-right: 1.5%;
-    height: 30vh;
+    margin-right: 2%;
+    margin-bottom: 2%;
+    height: 35vh;
     background-color: rgba(255, 255, 255, 0.5);
 }
 .typebot div:first-child{
@@ -84,9 +136,7 @@
     margin-bottom: 14%;
 }
 
-.typebot div:last-child img{
-    margin: -60% 0 42% 95%;
-    margin-top: -60%;
-    margin-bottom: 42%;
+.formbot img{
+    margin: -55% 0 42% 95%;
     width: 16%;
 }
