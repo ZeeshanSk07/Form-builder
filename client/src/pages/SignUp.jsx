@@ -6,55 +6,78 @@ import vercircle from "../assets/login/Ellipse 2.png";
 import triangle from "../assets/login/Group 2 (1).png";
 import { useNavigate } from "react-router-dom";
 import { Signup } from "../api/User";
+import toast, { Toaster } from 'react-hot-toast';
 
 function SignUp() {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [errors, setErrors] = useState({});
     const navigate = useNavigate();
 
+    
+
     const handleSignup = async () => {
+        const newErrors = {};
+        if (!username) newErrors.username = "Username is required";
+        if (!email) newErrors.email = "Email is required";
+        if (!password) newErrors.password = "Password is required";
+        if (!confirmPassword) newErrors.confirmPassword = "Confirm Password is required";
+        if (password !== confirmPassword) newErrors.confirmPassword = "Passwords do not match";
+        setErrors(newErrors);
+
+        if (Object.keys(newErrors).length === 0) {
         try {
             const response = await Signup(username, email, password);
-            console.log(response);
+            console.log('Signup response:', response);
             if (response.status === 201) {
-                alert('User created successfully!');
-                navigate('/login');
+                toast.success('User created successfully!');
+                setTimeout(() => {
+                    navigate('/login');
+                }, 1000); 
             } else {
-                alert('Error creating user: ' + (response.data.message || 'Unknown error'));
+                toast.error('Error creating user: ' + (response.data.message || 'Unknown error'));
             }
         } catch (error) {
-            alert('Error creating user: ' + error.message);
+            console.error('Signup error:', error);
+            toast.error('Error creating user: ' + error.message);
         }
+    };
+
     };
 
     return (
         <div className="signup">
-            <img onClick={() => navigate(-1)} src={arrow} alt="" />
+            <img onClick={() => navigate(-1)} src={arrow} alt="Back arrow" />
+            
             <div className="middle">
-                <img src={triangle} alt="" />
+                <img src={triangle} alt="Triangle" />
                 <div className="form">
                     <label htmlFor="username">Username</label>
-                    <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Enter a username" />
+                    <input required type="text" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Enter a username" />
+                    <span className="error">{errors.username}</span>
 
                     <label htmlFor="email">Email</label>
-                    <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Enter your email" />
+                    <input required type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Enter your email" /><span className="error">{errors.email}</span>
 
                     <label htmlFor="password">Password</label>
-                    <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="**********" />
+                    <input required type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="**********" /> <span className="error">{errors.password}</span>
 
                     <label htmlFor="confirm">Confirm Password</label>
-                    <input type="password" placeholder="" />
+                    <input required type="password" placeholder="" />
+                    <span className="error">{errors.confirmPassword}</span>
 
                     <button onClick={handleSignup}>Sign Up</button>
+                    <Toaster position="top-center" reverseOrder={false} />
                     <p>
                         Already have an account? <a href="/login">Login</a>
                     </p>
                 </div>
-                <img src={vercircle} alt="" />
+                <img src={vercircle} alt="Vertical circle" />
             </div>
             <div className="bottom">
-                <img src={semicircle} alt="" />
+                <img src={semicircle} alt="Semicircle" />
             </div>
         </div>
     );

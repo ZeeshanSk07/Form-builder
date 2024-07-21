@@ -43,7 +43,7 @@
 }
 
 .forms input {
-  margin: 8px 0 25px 0;
+  margin: 8px 0 0px 0;
   padding: 8px 8px;
   align-items: baseline;
   font-size: 0.9rem;
@@ -69,4 +69,10 @@
   display: flex;
   margin: 6.5% 0 0 55%;
   position: fixed;
+}
+.error {
+  color: red;
+  font-size: 0.8em;
+  margin-top: 0.5em;
+  margin-bottom: 10px;
 }
