@@ -1,0 +1,92 @@
+:root {
+    --white: rgba(255, 255, 255, 1);
+    --gray: rgba(160, 174, 192, 1);
+    --blue: rgba(26, 95, 255, 1);
+    --outfit: "Outfit";
+    --opensans: "Open Sans";
+}
+
+.dashboard {
+    width: 100vw;
+    margin: 0;
+    font-family: var(--opensans);
+    color: var(--white);
+}
+.headbox{
+    display: flex;
+    width: 100vw;
+    border: solid 1px rgba(255, 255, 255, 0.16);
+    justify-content: center;
+}
+.headbox h3{
+    border: solid 1px rgba(255, 255, 255, 0.16);
+    padding: 0.45% 0.8%;
+    font-size: 0.9rem;
+    display: flex;
+    align-content: baseline;
+}
+.headbox h3 img{
+    margin: 3px 0 0 10px;
+}
+
+.strip{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    padding-left: 18%;
+    padding-top: 2.7%;
+}
+.strip div:first-child{
+    display: flex;
+    width: 11.3%;
+}
+.strip div:first-child img{
+    width: 20%;
+    height: 80%;
+}
+.strip div:last-child img{
+    margin-right: 0;
+    margin-left: 7px;
+    width: 35%;
+}
+
+.strip div{
+    display: flex;
+    flex-direction: row;
+    font-size: 1rem;
+    background-color: rgb(42,42,45);
+    padding: 0.45% 1%;
+    border-radius: 6px;
+    margin-right: 1.25rem;
+}
+
+.typebot{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 1.5% 18%;
+}
+.typebot div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 20%;
+    border-radius: 6px;
+    margin-right: 1.5%;
+    height: 30vh;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+.typebot div:first-child{
+    background-color: var(--blue);
+}
+.typebot div:first-child img{
+    margin-bottom: 14%;
+}
+
+.typebot div:last-child img{
+    margin: -60% 0 42% 95%;
+    margin-top: -60%;
+    margin-bottom: 42%;
+    width: 16%;
+}
