@@ -1,0 +1,12 @@
+.head{
+    color: white;
+    font-size: 4rem;
+    text-align: center;
+    justify-content: center;
+}
+
+.msg{
+    color: gray;
+    font-size: 1.3rem;
+    margin-top: -18px;
+}
