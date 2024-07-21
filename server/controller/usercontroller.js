@@ -57,6 +57,7 @@ function login() {
                     res.status(200).json({
                         message: 'Login successful',
                         email: existingUser.email,
+                        username: existingUser.username,
                         token
                     });
 

@@ -5,16 +5,18 @@ import SignUp from "./pages/SignUp";
 import Notfound from "./pages/Notfound";
 import Dashboard from "./pages/Dashboard";
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import { useState } from "react";
 
 function App() {
+  const [currentUser, setCurrentUser] = useState(false);
   return (
     <>
       <BrowserRouter>
         <Routes>
           <Route exact path="/" element={<HomePage />} />
-          <Route path="/login" element={<LoginPage />} />
+          <Route path="/login" element={<LoginPage currentUser={currentUser} setCurrentUser={setCurrentUser}/>} />
           <Route path="/signup" element={<SignUp />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/dashboard" element={<Dashboard currentUser={currentUser} />} />
           <Route path= '*' element={<Notfound/>} />
         </Routes>
       </BrowserRouter>

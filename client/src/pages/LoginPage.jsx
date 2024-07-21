@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { Login } from '../api/User';
 import toast, { Toaster } from 'react-hot-toast';
 
-function LoginPage() {
+function LoginPage({currentUser,setCurrentUser}) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errors, setErrors] = useState({});
@@ -23,12 +23,13 @@ function LoginPage() {
         if (Object.keys(newErrors).length === 0) {
             try {
                 const response = await Login(email, password);
-                console.log(response);
                 if (response.status === 200) {
+                    setCurrentUser(response.data);
+                    console.log(currentUser);
                     localStorage.setItem('token', response.data.token);
                     toast.success('Login successful');
                     setTimeout(() => {
-                        navigate('/');
+                        navigate('/dashboard');
                     }, 1000); 
                 } else {
                     toast.error('Invalid email or password');

@@ -70,13 +70,21 @@
     padding-right: 0;
     margin-right: 0;
 }
+
+.newfolder{
+    position: absolute;
+    left: 45%;
+    top: 25%;
+}
+
 .createform{
     display: flex;
-    width: 14%;
+    width: 12.5%;
     background-color: rgb(42,42,45);
     border-radius: 8px;
     align-items: center;
     padding: 0.4% 0;
+    cursor: pointer;
 }
 .createform img{
     width: 15%;

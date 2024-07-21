@@ -5,20 +5,26 @@ import create from "../assets/dashboard/create.png";
 import deleteicon from "../assets/dashboard/delete.png";
 import add from "../assets/dashboard/add.png";
 
-function Dashboard() {
+function Dashboard({currentUser}) {
   let arr = [
     
   ];
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
+  const [createfold, setCreatefold] = useState(false);
   const toggleDropdown = () => {
     setIsDropdownVisible(!isDropdownVisible);
   };
+
+  const createfolder = () => {
+    setCreatefold(true);
+  }
+
   return (
     <>
       <div className="dashboard">
         <div className="headbox">
           <h3>
-            user's workspace <img onClick={toggleDropdown} 
+            <span>{currentUser.username}</span>'s workspace <img onClick={toggleDropdown} 
               style={{ cursor: 'pointer' }} src={dropdown} alt="dropdown" />
               {isDropdownVisible && (
             <><h3 className='dropdown-menu'>
@@ -33,9 +39,9 @@ function Dashboard() {
           
         </div>
         <div className="strip">
-          <div className="createform">
+          <div onClick={createfolder} className="createform">
             <img src={create} alt="" />
-            Create a formbot
+            Create a folder
           </div>
           <div className="scrollstrip">
             {arr.map((ele, index) => (
@@ -45,6 +51,13 @@ function Dashboard() {
             ))}
           </div>
         </div>
+
+        {createfold && <div className="newfolder">
+          <h2>Create New Folder</h2>
+          <input type="text" placeholder="Enter folder name"/><br />
+          <button>Done</button>
+          <button>Cancel</button>
+        </div>}
 
         <div className="typebot">
           <div>

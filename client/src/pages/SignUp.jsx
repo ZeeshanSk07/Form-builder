@@ -65,7 +65,7 @@ function SignUp() {
                     <input required type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="**********" /> <span className="error">{errors.password}</span>
 
                     <label htmlFor="confirm">Confirm Password</label>
-                    <input required type="password" placeholder="" />
+                    <input required type="password" placeholder="" onChange={(e) => setConfirmPassword(e.target.value)}/>
                     <span className="error">{errors.confirmPassword}</span>
 
                     <button onClick={handleSignup}>Sign Up</button>
