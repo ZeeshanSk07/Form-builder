@@ -4,13 +4,20 @@ import dropdown from "../assets/dashboard/dropdown.png";
 import create from "../assets/dashboard/create.png";
 import deleteicon from "../assets/dashboard/delete.png";
 import add from "../assets/dashboard/add.png";
+import { useNavigate } from "react-router-dom";
 
 function Dashboard({currentUser}) {
   let arr = [
-    
+    'dashboard',
+    'dashboard'
   ];
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
   const [createfold, setCreatefold] = useState(false);
+  const [confirmdel, setConfirmdel] = useState(false);
+  const [confirmdelform, setConfirmdelform] = useState(false);
+
+  const navigate = useNavigate();
+  
   const toggleDropdown = () => {
     setIsDropdownVisible(!isDropdownVisible);
   };
@@ -27,7 +34,7 @@ function Dashboard({currentUser}) {
             <span>{currentUser.username}</span>'s workspace <img onClick={toggleDropdown} 
               style={{ cursor: 'pointer' }} src={dropdown} alt="dropdown" />
               {isDropdownVisible && (
-            <><h3 className='dropdown-menu'>
+            <><h3 onClick={(e)=>navigate('/settings')} className='dropdown-menu'>
               Settings
             </h3>
             <h3 className='dropdown-menu'>
@@ -46,7 +53,7 @@ function Dashboard({currentUser}) {
           <div className="scrollstrip">
             {arr.map((ele, index) => (
               <div className="stripbox" key={index}>
-                {ele}<img src={deleteicon} alt="delete" />
+                {ele}<img onClick={(e)=>setConfirmdel(true)} src={deleteicon} alt="delete" />
               </div>
             ))}
           </div>
@@ -55,8 +62,22 @@ function Dashboard({currentUser}) {
         {createfold && <div className="newfolder">
           <h2>Create New Folder</h2>
           <input type="text" placeholder="Enter folder name"/><br />
-          <button>Done</button>
-          <button>Cancel</button>
+          <button className="done">Done</button>
+          <button onClick={(e)=>setCreatefold(false)}>Cancel</button>
+        </div>}
+
+        {confirmdel && <div className="confirmdel">
+          <h2>Are you sure you want to 
+          delete this folder ?</h2>
+          <button className="confirm">Confirm</button>
+          <button onClick={(e)=>setConfirmdel(false)} className="cancel">Cancel</button>
+        </div>}
+
+        {confirmdelform && <div className="confirmdel">
+          <h2>Are you sure you want to 
+          delete this Form ?</h2>
+          <button className="confirm">Confirm</button>
+          <button onClick={(e)=>setConfirmdelform(false)} className="cancel">Cancel</button>
         </div>}
 
         <div className="typebot">
@@ -66,7 +87,7 @@ function Dashboard({currentUser}) {
           </div>
           {arr.map((item, index) => (
             <div className="formbot" key={index}>
-              <img src={deleteicon} alt="del" />
+              <img onClick={(e)=>setConfirmdelform(true)} src={deleteicon} alt="del" />
               {item}
             </div>
           ))}

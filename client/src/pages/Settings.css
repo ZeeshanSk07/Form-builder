@@ -1,0 +1,71 @@
+:root {
+    --white: rgba(255, 255, 255, 1);
+    --gray: rgba(160, 174, 192, 1);
+    --blue: rgba(26, 95, 255, 1);
+    --outfit: "Outfit";
+    --opensans: "Open Sans";
+}
+
+.settings{
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    font-family: var(--opensans);
+}
+
+.settings h2{
+    font-size: 24px;
+    text-align: center;
+    margin: 8% 10% 18% 0;
+    color: var(--white);
+}
+.settings .input{
+    display: flex;
+    flex-direction: row;
+    width: 24vw;
+    border: 1.38px solid rgb(208,208,208,1);
+    border-radius: 8px;
+    margin-bottom: 4%;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+   
+
+}
+.input input{
+    background-color: transparent;
+    border: none;
+    width: 20.5vw;
+    padding: 8px 10px 8px 10px;
+    font-size: 1rem;
+    align-content: center;
+    justify-items: center;
+    color: rgb(111,110,107);
+}
+
+.input img:last-child{
+    margin-left: 0;
+}
+.input img:first-child{
+    margin-right: 0;
+}
+.input img{
+    margin: 2% 2.5%;
+    width: 8%;
+}
+
+.input input:focus{
+    outline: none;
+    border: none;
+}
+
+.settings button{
+    margin-top: 3%;
+    width: 24.2vw;
+    border-radius: 25px;
+}
