@@ -5,16 +5,19 @@ import create from "../assets/dashboard/create.png";
 import deleteicon from "../assets/dashboard/delete.png";
 import add from "../assets/dashboard/add.png";
 import { useNavigate } from "react-router-dom";
+import {CreateFolder, DeleteFolder, GetFolders} from "../api/Folders";
 
-function Dashboard({currentUser}) {
+function Dashboard({currentUser, setCurrentUser}) {
   let arr = [
-    'dashboard',
-    'dashboard'
+    
   ];
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
   const [createfold, setCreatefold] = useState(false);
   const [confirmdel, setConfirmdel] = useState(false);
   const [confirmdelform, setConfirmdelform] = useState(false);
+
+  const [foldName, setFoldName] = useState('');
+
 
   const navigate = useNavigate();
   
@@ -24,6 +27,22 @@ function Dashboard({currentUser}) {
 
   const createfolder = () => {
     setCreatefold(true);
+  }
+
+  const newFolder = async() => {
+        const response = await CreateFolder(foldName);
+        if(response.status === 201) {
+          setFoldName('');
+          setCreatefold(false);
+          let folders = await GetFolders();
+
+            if (Array.isArray(folders)) {
+                const arr = folders.map(folder => folder.name);
+            } else {
+                console.error('GetFolders did not return an array:', folders);
+            }
+        }
+      
   }
 
   return (
@@ -37,8 +56,8 @@ function Dashboard({currentUser}) {
             <><h3 onClick={(e)=>navigate('/settings')} className='dropdown-menu'>
               Settings
             </h3>
-            <h3 className='dropdown-menu'>
-            Logout
+            <h3 onClick={(e)=>{setCurrentUser('');navigate('/')}} className='dropdown-menu'>
+              Logout
             </h3></>
             
           )}
@@ -61,8 +80,8 @@ function Dashboard({currentUser}) {
 
         {createfold && <div className="newfolder">
           <h2>Create New Folder</h2>
-          <input type="text" placeholder="Enter folder name"/><br />
-          <button className="done">Done</button>
+          <input onChange={(e)=>setFoldName(e.target.value)} type="text" placeholder="Enter folder name"/><br />
+          <button onClick={newFolder} className="done">Done</button>
           <button onClick={(e)=>setCreatefold(false)}>Cancel</button>
         </div>}
 
