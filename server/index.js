@@ -4,13 +4,13 @@ const user = require('./routes/user');
 const createfolder = require('./routes/createfolder.js');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const dotenv = require('dotenv').config();
 
 const app = express();
 app.use(cors());
 const Port = 4000;
 
 app.use(bodyParser.json());
-
 app.use('/user', user);
 
 app.use('/', createfolder);
@@ -22,7 +22,7 @@ app.get('/health', (req, res) => {
     });
 })
 
-mongoose.connect('mongodb+srv://zeeshansk:zeeshansk@job-listing-db.rhynxiz.mongodb.net/?retryWrites=true&w=majority&appName=job-listing-db')
+mongoose.connect(process.env.Mongo_Url)
     .then(() => {
         console.log('Database connected');
     })

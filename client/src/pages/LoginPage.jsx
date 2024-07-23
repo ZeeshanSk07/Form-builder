@@ -13,6 +13,8 @@ function LoginPage({currentUser,setCurrentUser}) {
     const [password, setPassword] = useState('');
     const [errors, setErrors] = useState({});
     const navigate = useNavigate();
+    
+    
 
     const handleLogin = async () => {
         const newErrors = {};
@@ -25,12 +27,11 @@ function LoginPage({currentUser,setCurrentUser}) {
                 const response = await Login(email, password);
                 if (response.status === 200) {
                     setCurrentUser(response.data);
-                    console.log(currentUser);
                     localStorage.setItem('token', response.data.token);
                     toast.success('Login successful');
                     setTimeout(() => {
                         navigate('/dashboard');
-                    }, 1000); 
+                    }, 1200); 
                 } else {
                     toast.error('Invalid email or password');
                 }

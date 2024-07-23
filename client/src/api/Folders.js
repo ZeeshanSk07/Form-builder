@@ -1,9 +1,9 @@
 import axios from 'axios';
 const Backend_Url = 'http://localhost:4000';
 
-const CreateFolder = async (foldName) => {
+const CreateFolder = async (foldName, userId) => {
     try {
-        const response = await axios.post(`${Backend_Url}/createfolder`, { foldName });
+        const response = await axios.post(`${Backend_Url}/createfolder`, { foldName, userId });
         return response;
     } catch (err) {
         return {
@@ -13,9 +13,9 @@ const CreateFolder = async (foldName) => {
     }
 }
 
-const DeleteFolder = async (folderId) => {
+const DeleteFolder = async (foltodel) => {
     try {
-        const response = await axios.delete(`${Backend_Url}/deletefolder/${folderId}`);
+        const response = await axios.delete(`${Backend_Url}/deletefolder/${foltodel}`);
         return response;
     } catch (err) {
         return {
@@ -25,22 +25,21 @@ const DeleteFolder = async (folderId) => {
     }
 }
 
-const GetFolders = async(req, res) => {
+const GetFolders = async (userId) => {
     try {
-        const response = await axios.get(`${Backend_Url}/getfolders`);
-        const data = await response.json();
-        if (response.ok) {
-            return data; // Assuming `data` is an array of folders
-        } else {
-            console.error('Failed to fetch folders:', data);
-            return [];
-        }
+        const response = await axios.get(`${Backend_Url}/getfolders`, {
+            params: { userId }
+        });
+        return response.data;  // Assuming the response contains the folder data directly
     } catch (err) {
         return {
-            status: err.response? err.response.status : 500,
-            data: err.response? err.response.data : { message: 'Internal Server Error' }
-        }
+            status: err.response ? err.response.status : 500,
+            data: err.response ? err.response.data : { message: 'Internal Server Error' }
+        };
     }
-}
+};
+
+
+
 
 export {CreateFolder, DeleteFolder, GetFolders} ;

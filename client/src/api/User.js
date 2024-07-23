@@ -26,4 +26,16 @@ const Signup = async (username, email, password) => {
     }
 };
 
-export { Login, Signup };
+const verifyToken = async (token) => {
+    try {
+      const response = await axios.get(`${Backend_Url}/verifytoken`, {
+        headers: { 'Authorization': token }
+      });
+      
+      return response.data;
+    } catch (error) {
+      console.error('Error verifying token:', error);
+    }
+  };
+
+export { Login, Signup , verifyToken};
