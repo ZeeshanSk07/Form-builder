@@ -19,7 +19,7 @@ function App() {
           <Route path="/login" element={<LoginPage currentUser={currentUser} setCurrentUser={setCurrentUser}/>} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/dashboard" element={<Dashboard currentUser={currentUser} setCurrentUser={setCurrentUser}/>} />
-          <Route path="/settings" element={<Settings setCurrentUser={setCurrentUser} />} />
+          <Route path="/settings" element={<Settings currentUser={currentUser} setCurrentUser={setCurrentUser} />} />
           <Route path="/header" element={<Header/>} />
           <Route path= '*' element={<Notfound/>} />
         </Routes>

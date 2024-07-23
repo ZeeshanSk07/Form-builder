@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import './Settings.css';
 import profile from '../assets/settings/profile.png';
 import lock from '../assets/settings/lock.png';
@@ -6,10 +6,16 @@ import eye from '../assets/settings/eye.png';
 import logout from '../assets/settings/Logout.png';
 import {useNavigate} from 'react-router-dom';
 
-function Settings({setCurrentUser}) {
+function Settings({currentUser, setCurrentUser}) {
 
   const navigate = useNavigate();
-  
+
+  useEffect(() => {
+    if (!currentUser){
+      navigate('/login');
+    }
+  }, []);
+
   const Logout= () => {
     setCurrentUser('');
     navigate('/');
