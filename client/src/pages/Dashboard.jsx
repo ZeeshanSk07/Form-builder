@@ -22,8 +22,13 @@ function Dashboard({ currentUser, setCurrentUser }) {
 
  
 useEffect(() => {
-  console.log('FETCH')
-        fetchData();
+  if (currentUser){
+    fetchData();
+  }
+  else{
+    navigate('/login');
+  }
+    
  }, []);
 
  useEffect(() => {
@@ -82,6 +87,12 @@ useEffect(() => {
     
   }
 
+  const Logout= () => {
+    setCurrentUser('');
+    navigate('/');
+    localStorage.removeItem('token');
+  }
+
   return (
     <>
       <div className="dashboard">
@@ -92,7 +103,7 @@ useEffect(() => {
             {isDropdownVisible && (
               <>
                 <h3 onClick={() => navigate('/settings')} className='dropdown-menu'>Settings</h3>
-                <h3 onClick={() => { setCurrentUser(''); navigate('/'); }} className='dropdown-menu'>Logout</h3>
+                <h3 onClick={Logout} style={{color:'rgba(255, 165, 76, 1)'}} className='dropdown-menu'>Logout</h3>
               </>
             )}
           </h3>

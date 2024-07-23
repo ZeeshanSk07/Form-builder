@@ -4,8 +4,17 @@ import profile from '../assets/settings/profile.png';
 import lock from '../assets/settings/lock.png';
 import eye from '../assets/settings/eye.png';
 import logout from '../assets/settings/Logout.png';
+import {useNavigate} from 'react-router-dom';
 
-function Settings() {
+function Settings({setCurrentUser}) {
+
+  const navigate = useNavigate();
+  
+  const Logout= () => {
+    setCurrentUser('');
+    navigate('/');
+    localStorage.removeItem('token');
+  }
   return (
     <>
       <div className="settings">
@@ -28,6 +37,8 @@ function Settings() {
         </div>
 
         <button>Update</button>
+
+        <div onClick={Logout} className="logoff"><img src={logout} alt="logout" />Log out</div>
       </div>
     </>
   );

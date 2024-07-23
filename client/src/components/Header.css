@@ -1,0 +1,71 @@
+.header {
+   background-color: #18181B; 
+   height: 4vh;
+   width: 94vw;
+   margin: 0;
+   padding: 0.8% 1.5%;
+   display: flex;
+   flex-direction: row;
+}
+.header div:first-child input{
+    background-color: #37373E;
+    border: none;
+    border-radius: 6px;
+    padding: 0 10%;
+    width: 15vw;
+
+}
+
+.header div{
+    display: flex;
+    flex-direction: row;
+}
+
+.header button:first-child{
+    background-color: #848890;
+}
+.header div button:last-child{
+    color: #F55050;
+    background-color: transparent;
+    border: none;
+}
+.header .save{
+    background-color: rgba(74, 222, 128, 0.8);
+}
+
+.opt{
+    font-size: 1rem;
+    display: flex;
+    width: 40vw;
+    column-gap: 5%;
+    margin: auto 0 auto 20%;
+}
+.opt div{
+    display: flex;
+    padding: 1%;
+    cursor: pointer;
+}
+
+.active{
+    border: 1px solid rgba(126, 166, 255, 1);
+    border-radius: 4px;
+    color: rgba(126, 166, 255, 1);
+}
+
+.buttons{
+    display: flex;
+    column-gap: 20%;  
+    margin: 0.08% 3% 0.08% 0;  
+    padding: auto ;
+}
+.buttons button{
+    margin-right: 1%;
+    padding: 0.3% 10%;
+    font-size: 1rem;
+}
+.buttons button:last-child{
+    font-size: 1.5rem;
+    margin-top: -1.2%;
+}
+
+    

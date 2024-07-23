@@ -47,7 +47,7 @@
   padding: 8px 8px;
   align-items: baseline;
   font-size: 0.9rem;
-  color: rgba(99, 99, 100, 1);
+  color: var(--white);
   border-radius: 10px;
   background-color: transparent;
   border: 1px solid rgba(255, 255, 255, 0.5);
@@ -55,6 +55,7 @@
 .forms button {
   border-radius: 10px;
   padding: 10px 8px;
+  margin-top: 2%;
 }
 
 .forms a {
