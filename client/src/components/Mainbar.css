@@ -7,9 +7,64 @@
 }
 
 .mainbar {
-    width: 100vw;
-    height: 300px;
-    margin: 0;
-    padding: 0;
+    width: 25vw;
+    height: 71.5vh;
+    margin: 0% auto 0 20%;
+    border-radius: 10px;
+    padding: 5% 1% ;
     font-family: var(--opensans);
+    font-weight:600;
+    overflow-y: scroll;
+    -ms-overflow-style: none; 
+    scrollbar-width: none; 
+    font-size: 1.35rem;
+    color: var(--white);
+    letter-spacing: 2px;
+}
+.mainbar::-webkit-scrollbar{
+    display: none;
+}
+.mainbar div:first-child{
+    display: flex;
+    background-color: rgb(24,24,27);
+    padding: 4% 8%;
+    border-radius: 12px;
+    margin-bottom: 5%;
+}
+.mainbar div:first-child img{
+    display: flex;
+    width: 10%;
+    height: 3.35vh;
+    margin: 1% 6% 1% 0;
+}
+
+.askbubble, .askinput{
+    margin-bottom: 5%;
+    height: 8rem;
+    background-color: rgb(24,24,27);
+    border-radius: 10px;
+}
+
+.askbubble div:first-child, .askinput div:first-child{
+    margin:0;
+    display: flex;
+    padding: 3% 8% 3% 8%;
+}
+.askbubble input{
+    margin: 1% auto 6% 8%;
+    padding: 3% 2% 3% 12%;
+    font-size: 1rem;
+    width: 17vw;
+    border: none;
+    background-color: rgb(42,42,45);
+    border-radius: 8px;
+}
+
+
+
+.askinput p{
+    margin: 0 8% 10vh 8%;
+    padding: 0;
+    font-size: 0.8rem;
+    color: rgba(85, 85, 85, 1);
 }
