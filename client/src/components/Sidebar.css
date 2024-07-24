@@ -1,0 +1,62 @@
+:root {
+    --white: rgba(255, 255, 255, 1);
+    --gray: rgba(160, 174, 192, 1);
+    --blue: rgba(26, 95, 255, 1);
+    --outfit: "Outfit";
+    --opensans: "Open Sans";
+}
+
+.sidebar{
+    width: 23vw;
+    height: 77.73vh;
+    margin: 1% 1.1% 0 1.1%;
+    padding: 3% 1.5%;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 10px;
+    color: var(--white);
+    font-family: var(--outfit);
+    background-color: rgb(24,24,27);
+    overflow: hidden;
+}
+
+.bubbles, .inputs{
+    font-size: 1.23rem;
+    margin-bottom: 5%;
+}
+
+.headbot{
+    margin-bottom: 3%;
+}
+
+
+.bubbleitem, .inputitem{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    column-gap: 0.5rem;
+    row-gap: 1rem;
+}
+
+.inputbox img{
+    margin: 1% 5% 1% 10%;
+    display: flex;
+}
+ .bubbleitem .inputbox img:last-child{
+    margin-bottom: 4px;
+ }
+
+ .bubbleitem .inputbox:last-child img{
+    height: 1.4vh;
+    margin-top: 0.7vh;
+}
+
+.inputbox{
+    display: flex;
+    font-size: 1rem;
+    padding: 3% 0.4%;
+    width: 47%;
+    height: fit-content;
+    background-color: rgba(31, 31, 35);
+    border-radius: 12px;
+}

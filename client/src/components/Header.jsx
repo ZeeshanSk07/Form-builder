@@ -4,7 +4,7 @@ import './Header.css';
 function Header() {
   return (
     <>
-        <div className="header">
+        <div className="headerbot">
             <div><input type="text" placeholder='Enter Form Name' /></div>
             
             <div className="opt">

@@ -1,4 +1,12 @@
-.header {
+:root {
+    --white: rgba(255, 255, 255, 1);
+    --gray: rgba(160, 174, 192, 1);
+    --blue: rgba(26, 95, 255, 1);
+    --outfit: "Outfit";
+    --opensans: "Open Sans";
+}
+
+.headerbot {
    background-color: #18181B; 
    height: 4vh;
    width: 94vw;
@@ -6,30 +14,33 @@
    padding: 0.8% 1.5%;
    display: flex;
    flex-direction: row;
+   font-family: var(--outfit);
+   color: var(--white);
 }
-.header div:first-child input{
+.headerbot div:first-child input{
     background-color: #37373E;
     border: none;
     border-radius: 6px;
     padding: 0 10%;
-    width: 15vw;
-
+    width: 16vw;
+    margin: 1% 0 1% 10%;
+    font-size: 0.8rem;
 }
 
-.header div{
+.headerbot div{
     display: flex;
     flex-direction: row;
 }
 
-.header button:first-child{
+.headerbot button:first-child{
     background-color: #848890;
 }
-.header div button:last-child{
+.headerbot div button:last-child{
     color: #F55050;
     background-color: transparent;
     border: none;
 }
-.header .save{
+.headerbot .save{
     background-color: rgba(74, 222, 128, 0.8);
 }
 
@@ -38,7 +49,7 @@
     display: flex;
     width: 40vw;
     column-gap: 5%;
-    margin: auto 0 auto 20%;
+    margin: auto 8% auto 27%;
 }
 .opt div{
     display: flex;
@@ -55,7 +66,7 @@
 .buttons{
     display: flex;
     column-gap: 20%;  
-    margin: 0.08% 3% 0.08% 0;  
+    margin: 0.08% 4% 0.08% 0;  
     padding: auto ;
 }
 .buttons button{

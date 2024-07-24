@@ -1,0 +1,15 @@
+:root {
+    --white: rgba(255, 255, 255, 1);
+    --gray: rgba(160, 174, 192, 1);
+    --blue: rgba(26, 95, 255, 1);
+    --outfit: "Outfit";
+    --opensans: "Open Sans";
+}
+
+.mainbar {
+    width: 100vw;
+    height: 300px;
+    margin: 0;
+    padding: 0;
+    font-family: var(--opensans);
+}
