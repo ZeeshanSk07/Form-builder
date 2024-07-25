@@ -39,6 +39,7 @@
     color: #F55050;
     background-color: transparent;
     border: none;
+    cursor: pointer;
 }
 .headerbot .save{
     background-color: rgba(74, 222, 128, 0.8);
@@ -59,7 +60,7 @@
 
 .active{
     border: 1px solid rgba(126, 166, 255, 1);
-    border-radius: 4px;
+    border-radius: 6px;
     color: rgba(126, 166, 255, 1);
 }
 

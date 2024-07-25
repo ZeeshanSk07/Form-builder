@@ -8,10 +8,10 @@
 
 .mainbar {
     width: 25vw;
-    height: 71.5vh;
+    height: 82vh;
     margin: 0% auto 0 20%;
     border-radius: 10px;
-    padding: 5% 1% ;
+    padding: 5% 1% 0 1% ;
     font-family: var(--opensans);
     font-weight:600;
     overflow-y: scroll;
@@ -45,19 +45,20 @@
     border-radius: 10px;
 }
 
-.askbubble div:first-child, .askinput div:first-child{
-    margin:0;
+.askbubble div:nth-child(2), .askinput div:nth-child(2){
+    margin-top: -6%;
     display: flex;
-    padding: 3% 8% 3% 8%;
+    padding: 0% 8% 3% 8%;
 }
-.askbubble input{
-    margin: 1% auto 6% 8%;
+.askbubble input, .btnbot{
+    margin: 1% auto 8% 8%;
     padding: 3% 2% 3% 12%;
     font-size: 1rem;
     width: 17vw;
     border: none;
     background-color: rgb(42,42,45);
     border-radius: 8px;
+    color: rgba(192, 192, 192, 0.31);
 }
 
 
@@ -67,4 +68,14 @@
     padding: 0;
     font-size: 0.8rem;
     color: rgba(85, 85, 85, 1);
+}
+
+.deletebubble{
+    position:relative;
+    cursor: pointer;
+    width: 8%;
+    top: -10%;
+    left: 94%;
+    padding-bottom: 0;
+    margin-bottom: 0;
 }

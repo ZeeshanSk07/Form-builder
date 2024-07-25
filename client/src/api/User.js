@@ -26,6 +26,18 @@ const Signup = async (username, email, password) => {
     }
 };
 
+const Updateuser = async(userId, username, email, password, newpassword) => {
+    try {
+        const response = await axios.put(`${Backend_Url}/user/${userId}`, { username, email, password, newpassword });
+        return response;
+    } catch (err) {
+        return {
+            status: err.response? err.response.status : 500,
+            data: err.response? err.response.data : { message: 'Internal Server Error' }
+        }
+    }
+}
+
 const verifyToken = async (token) => {
     try {
       const response = await axios.get(`${Backend_Url}/verifytoken`, {

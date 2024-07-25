@@ -57,6 +57,7 @@
     padding: 3% 0.4%;
     width: 47%;
     height: fit-content;
+    cursor: pointer;
     background-color: rgba(31, 31, 35);
     border-radius: 12px;
 }

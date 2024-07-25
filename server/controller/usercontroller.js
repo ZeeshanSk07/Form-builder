@@ -58,6 +58,7 @@ function login() {
                         message: 'Login successful',
                         email: existingUser.email,
                         username: existingUser.username,
+                        id: existingUser._id,
                         token
                     });
 
@@ -78,7 +79,46 @@ function login() {
     };
 }
 
+const Updateuser = () => {
+    return async (req, res) => {
+        try {
+            const userId = req.params.id;
+            const { username, email, oldpassword, newpassword } = req.body;
+
+            if (!username || !email || !oldpassword || !newpassword) {
+                return res.status(400).json({ message: 'Please provide all required fields' });
+            }
+
+            const userone = await User.findById(userId);
+            if (!userone) {
+                return res.status(404).json({ message: 'User not found' });
+            }
+
+            // Corrected bcrypt comparison
+            const ispasscorrect = await bcrypt.compare(oldpassword, userone.password);
+            if (!ispasscorrect) {
+                return res.status(401).json({ message: 'Invalid Password' });
+            }
+
+            userone.username = username;
+            userone.email = email;
+            userone.password = await bcrypt.hash(newpassword, 10); // Hash the new password
+
+            await userone.save();
+
+            res.json({
+                message: 'User updated successfully',
+                user: userone
+            });
+        } catch (error) {
+            res.status(500).json({ message: 'Server Error', error: error.message });
+        }
+    }
+}
+
+
 module.exports = {
     signup,
-    login
+    login,
+    Updateuser,
 };

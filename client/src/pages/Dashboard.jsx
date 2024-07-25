@@ -6,7 +6,6 @@ import deleteicon from "../assets/dashboard/delete.png";
 import add from "../assets/dashboard/add.png";
 import { useNavigate } from "react-router-dom";
 import { CreateFolder, DeleteFolder, GetFolders } from "../api/Folders";
-import { verifyToken } from "../api/User";
 
 function Dashboard({ currentUser, setCurrentUser }) {
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
@@ -39,7 +38,8 @@ useEffect(() => {
 
  useEffect(() => {
   if (currentUser?.email) {
-    setUserId(currentUser.email);
+    console.log(currentUser);
+    setUserId(currentUser.id);
   }
 }, [currentUser]);
 
@@ -148,7 +148,7 @@ useEffect(() => {
         )}
 
         <div className="typebot">
-          <div>
+          <div onClick={()=>navigate('/createtypebot')}>
             <img src={add} alt="add" />
             Create a typebot
           </div>

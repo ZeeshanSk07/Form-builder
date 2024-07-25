@@ -1,0 +1,46 @@
+:root {
+    --white: rgba(255, 255, 255, 1);
+    --gray: rgba(160, 174, 192, 1);
+    --blue: rgba(26, 95, 255, 1);
+    --outfit: "Outfit";
+    --opensans: "Open Sans";
+}
+.themebar{
+    display: flex;
+    flex-direction: column;
+    width: 22vw;
+    height: 92.6vh;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    background-color: rgb(24,24,27);
+}
+
+.themebar h2{
+    font-size: 1.3rem;
+    margin: 0;
+    width: 22vw;
+    padding: 10% 0;
+    color: var(--gray);
+    border: 1px solid rgba(44, 44, 47, 1);
+    color: var(--white);
+    font-family: var(--opensans);
+}
+
+.themeopt{
+    display: flex;
+    flex-direction: column;
+}
+
+.themeopt img{
+    margin: 0 auto 3% auto;
+    width: 55%;
+    padding: 0 0 4% 0;
+}
+.themeopt img:first-child{
+    margin-top: 7%;
+}
+.themeopt img:last-child{
+    width: 50%;
+    padding: 3%;
+}

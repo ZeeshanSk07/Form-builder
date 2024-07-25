@@ -1,4 +1,4 @@
-import React from 'react';
+import React ,{useEffect} from 'react';
 import './Sidebar.css';
 import text from '../assets/typebot/text.png';
 import img from '../assets/typebot/img.png';
@@ -12,7 +12,7 @@ import date from '../assets/typebot/date.png';
 import rating from '../assets/typebot/rating.png';
 import btns from '../assets/typebot/btns.png';
 
-function Sidebar() {
+function Sidebar({selectedbtn, setSelectedbtn}) {
 
   const bubbles= [
     {
@@ -69,17 +69,29 @@ function Sidebar() {
     },
     {
       id: 7,
-      label: 'Buttons',
+      label: 'Button',
       img: btns,
     }
   ]
+
+  useEffect(() => {
+    console.log(selectedbtn);
+}, [selectedbtn]);
+
+  const handlebtnclick = async(buttonname, type) => {
+       await setSelectedbtn([...selectedbtn ,{
+        name: buttonname,
+        type: type,
+      }]);
+  }
+
   return (
     <>
       <div className="sidebar">
         <div className='bubbles'>
             <div className='headbot'>Bubbles</div>
             <div className='bubbleitem'>{bubbles.map((item, id)=>
-              <div className='inputbox' key={id}><img src={item.img} alt={item.label} />{item.label}</div>
+              <div onClick={()=>handlebtnclick(`${item.label}`, 'bubble')} className='inputbox' key={id}><img src={item.img} alt={item.label} />{item.label}</div>
               )}
             </div>
         </div>
@@ -88,7 +100,7 @@ function Sidebar() {
             <div className='headbot'>Inputs</div>
             <div className='inputitem'>
               {inputs.map((item, id) =>
-                <div className='inputbox'><img src={item.img} alt={item.label} />{item.label}</div>
+                <div key={id} onClick={()=>handlebtnclick(`${item.label}`, 'inputs')} className='inputbox'><img src={item.img} alt={item.label} />{item.label}</div>
               )}
             </div>
         </div>
