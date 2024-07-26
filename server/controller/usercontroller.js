@@ -32,6 +32,7 @@ function signup() {
                 res.status(201).json({
                     message: 'User created successfully',
                     user: newUser,
+                    id : newUser.id
                 });
             }
         } catch (error) {
@@ -84,7 +85,6 @@ const Updateuser = () => {
             const userId = req.params.id;
             
             const { updusername, updemail, oldpassword, newpassword } = req.body;
-            console.log(req.body);
             if (!updusername || !updemail || !oldpassword || !newpassword) {
                 return res.status(400).json({ message: 'Please provide all required fields' });
             }
@@ -116,8 +116,10 @@ const Updateuser = () => {
 }
 
 
+
+
 module.exports = {
     signup,
     login,
-    Updateuser
+    Updateuser,
 };

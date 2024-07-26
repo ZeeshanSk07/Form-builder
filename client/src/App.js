@@ -13,6 +13,8 @@ import Themebar from "./components/Themebar";
 function App() {
   const [currentUser, setCurrentUser] = useState(false);
   const [userId, setUserId] = useState('');
+  const [ theme, setTheme ] = useState('');
+  const [themeId, setThemeId] = useState('');
 
   return (
     <>
@@ -20,11 +22,11 @@ function App() {
         <Routes>
           <Route exact path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage currentUser={currentUser} setCurrentUser={setCurrentUser}/>} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/dashboard" element={<Dashboard currentUser={currentUser} setCurrentUser={setCurrentUser} userId={userId} setUserId={setUserId} />} />
+          <Route path="/signup" element={<SignUp/>} />
+          <Route path="/dashboard" element={<Dashboard currentUser={currentUser} setCurrentUser={setCurrentUser} userId={userId} setUserId={setUserId} theme={theme} setTheme={setTheme} setThemeId={setThemeId}/>} />
           <Route path="/settings" element={<Settings currentUser={currentUser} setCurrentUser={setCurrentUser} userId={userId} setUserId={setUserId} />} />
           <Route path="/themebar" element={<Themebar />} />
-          <Route path="/createtypebot" element={<CreateTypebot/>} />
+          <Route path="/createtypebot" element={<CreateTypebot theme={theme} setTheme={setTheme} themeId={themeId} setThemeId={setThemeId}/>} />
           <Route path= '*' element={<Notfound/>} />
         </Routes>
       </BrowserRouter>

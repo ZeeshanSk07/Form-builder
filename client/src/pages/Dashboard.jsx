@@ -6,8 +6,9 @@ import deleteicon from "../assets/dashboard/delete.png";
 import add from "../assets/dashboard/add.png";
 import { useNavigate } from "react-router-dom";
 import { CreateFolder, DeleteFolder, GetFolders } from "../api/Folders";
+import {GetTheme} from "../api/Theme";
 
-function Dashboard({ currentUser, setCurrentUser, userId, setUserId }) {
+function Dashboard({ currentUser, setCurrentUser, userId, setUserId, setTheme, setThemeId}) {
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
   const [createfold, setCreatefold] = useState(false);
   const [confirmdel, setConfirmdel] = useState(false);
@@ -22,6 +23,7 @@ function Dashboard({ currentUser, setCurrentUser, userId, setUserId }) {
 useEffect(() => {
   if (currentUser){
     fetchData();
+    
   }
   else{
     navigate('/login');
@@ -51,8 +53,11 @@ useEffect(() => {
         const folder = await GetFolders(userId);
         console.log('Fetched folders:', folder); // Log the fetched folders
         setFolders(folder);
-        console.log(folders); 
-        console.log('Fetched arr:', arr);
+
+        const themeon = await GetTheme(userId);
+        setThemeId(themeon.themes._id);
+        setTheme(themeon.themes.theme);
+
       } catch (error) {
         console.error('Error fetching folders:', error);
       }

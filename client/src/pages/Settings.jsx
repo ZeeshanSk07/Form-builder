@@ -35,13 +35,12 @@ function Settings({currentUser, setCurrentUser, userId, setUserId}) {
 
   const handleUpdate = async () => {
     const response = await Updateuser(userId, updusername, updemail, oldpassword, newpassword);
-    console.log(response);
     if (response.status === 200) {
       setCurrentUser(response.data);
       toast.success('Profile updated successfully');
     }
     else{
-      toast.error(response.data.message);
+      toast.error('Failed to update profile');
     }
   }
 

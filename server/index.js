@@ -12,8 +12,8 @@ const Port = 4000;
 
 app.use(bodyParser.json());
 app.use('/user', user);
-
 app.use('/', createfolder);
+
 app.get('/health', (req, res) => {
     res.json({
         message: 'Job listing API is working fine',

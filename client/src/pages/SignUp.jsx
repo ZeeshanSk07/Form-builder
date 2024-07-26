@@ -7,6 +7,7 @@ import triangle from "../assets/login/Group 2 (1).png";
 import { useNavigate } from "react-router-dom";
 import { Signup } from "../api/User";
 import toast, { Toaster } from 'react-hot-toast';
+import {defaultTheme} from '../api/Theme';
 
 function SignUp() {
     const [username, setUsername] = useState('');
@@ -30,21 +31,40 @@ function SignUp() {
         if (Object.keys(newErrors).length === 0) {
         try {
             const response = await Signup(username, email, password);
-            console.log('Signup response:', response);
+            
             if (response.status === 201) {
                 toast.success('User created successfully!');
                 setTimeout(() => {
                     navigate('/login');
-                }, 1000); 
+                }, 1300); 
+
+
+                setTimeout(async () => {
+                    const user = response.data.id;
+                    const theme = "dark";
+                    
+                    const resp = await defaultTheme(theme, user);
+                    if (resp.status === 201) {
+                        console.log('Theme response:', resp);
+                    } else {
+                        console.log('Theme error', resp.error);
+                    }
+                }, 0);
             } else {
-                toast.error('Error creating user: ' + (response.data.message || 'Unknown error'));
+                console.error('Error creating user: ' + (response.data.message || 'Unknown error'));
             }
+
+           
+
+
+
         } catch (error) {
             console.error('Signup error:', error);
             toast.error('Error creating user: ' + error.message);
         }
     };
 
+    
     };
 
     return (
