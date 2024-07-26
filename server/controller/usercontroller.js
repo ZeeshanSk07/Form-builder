@@ -62,7 +62,6 @@ function login() {
                         token
                     });
 
-                    // a jsonwebtoken is a string that tells the server that the user is authenticated
                 } else {
                     res.status(400).json({
                         message: 'Invalid credentials',
@@ -83,9 +82,10 @@ const Updateuser = () => {
     return async (req, res) => {
         try {
             const userId = req.params.id;
-            const { username, email, oldpassword, newpassword } = req.body;
-
-            if (!username || !email || !oldpassword || !newpassword) {
+            
+            const { updusername, updemail, oldpassword, newpassword } = req.body;
+            console.log(req.body);
+            if (!updusername || !updemail || !oldpassword || !newpassword) {
                 return res.status(400).json({ message: 'Please provide all required fields' });
             }
 
@@ -94,15 +94,14 @@ const Updateuser = () => {
                 return res.status(404).json({ message: 'User not found' });
             }
 
-            // Corrected bcrypt comparison
             const ispasscorrect = await bcrypt.compare(oldpassword, userone.password);
             if (!ispasscorrect) {
                 return res.status(401).json({ message: 'Invalid Password' });
             }
 
-            userone.username = username;
-            userone.email = email;
-            userone.password = await bcrypt.hash(newpassword, 10); // Hash the new password
+            userone.username = updusername;
+            userone.email = updemail;
+            userone.password = await bcrypt.hash(newpassword, 10);
 
             await userone.save();
 
@@ -120,5 +119,5 @@ const Updateuser = () => {
 module.exports = {
     signup,
     login,
-    Updateuser,
+    Updateuser
 };

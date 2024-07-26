@@ -12,6 +12,8 @@ import Themebar from "./components/Themebar";
 
 function App() {
   const [currentUser, setCurrentUser] = useState(false);
+  const [userId, setUserId] = useState('');
+
   return (
     <>
       <BrowserRouter>
@@ -19,8 +21,8 @@ function App() {
           <Route exact path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage currentUser={currentUser} setCurrentUser={setCurrentUser}/>} />
           <Route path="/signup" element={<SignUp />} />
-          <Route path="/dashboard" element={<Dashboard currentUser={currentUser} setCurrentUser={setCurrentUser}/>} />
-          <Route path="/settings" element={<Settings currentUser={currentUser} setCurrentUser={setCurrentUser} />} />
+          <Route path="/dashboard" element={<Dashboard currentUser={currentUser} setCurrentUser={setCurrentUser} userId={userId} setUserId={setUserId} />} />
+          <Route path="/settings" element={<Settings currentUser={currentUser} setCurrentUser={setCurrentUser} userId={userId} setUserId={setUserId} />} />
           <Route path="/themebar" element={<Themebar />} />
           <Route path="/createtypebot" element={<CreateTypebot/>} />
           <Route path= '*' element={<Notfound/>} />

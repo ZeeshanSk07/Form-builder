@@ -7,14 +7,13 @@ import add from "../assets/dashboard/add.png";
 import { useNavigate } from "react-router-dom";
 import { CreateFolder, DeleteFolder, GetFolders } from "../api/Folders";
 
-function Dashboard({ currentUser, setCurrentUser }) {
+function Dashboard({ currentUser, setCurrentUser, userId, setUserId }) {
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
   const [createfold, setCreatefold] = useState(false);
   const [confirmdel, setConfirmdel] = useState(false);
   const [confirmdelform, setConfirmdelform] = useState(false);
   const [foldName, setFoldName] = useState('');
   const [folders, setFolders] = useState([]);
-  const [userId, setUserId] = useState('');
   const [foltodel, setFoltodel] = useState('');
 
   let arr = ['ff','dd','ee','ddd','eee','ss','kdjdhhhhfhh','cnnndndnd','hdhhdbbd'];

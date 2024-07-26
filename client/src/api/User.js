@@ -26,9 +26,9 @@ const Signup = async (username, email, password) => {
     }
 };
 
-const Updateuser = async(userId, username, email, password, newpassword) => {
+const Updateuser = async(userId, updusername, updemail, oldpassword, newpassword) => {
     try {
-        const response = await axios.put(`${Backend_Url}/user/${userId}`, { username, email, password, newpassword });
+        const response = await axios.put(`${Backend_Url}/user/update/${userId}`, { updusername, updemail, oldpassword, newpassword });
         return response;
     } catch (err) {
         return {
@@ -50,4 +50,4 @@ const verifyToken = async (token) => {
     }
   };
 
-export { Login, Signup , verifyToken};
+export { Login, Signup , verifyToken, Updateuser};
