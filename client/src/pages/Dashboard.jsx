@@ -54,6 +54,8 @@ useEffect(() => {
         console.log('Fetched folders:', folder); // Log the fetched folders
         setFolders(folder);
 
+        
+
         const themeon = await GetTheme(userId);
         setThemeId(themeon.themes._id);
         setTheme(themeon.themes.theme);

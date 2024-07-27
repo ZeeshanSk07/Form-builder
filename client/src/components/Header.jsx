@@ -1,14 +1,19 @@
 import React, { useState } from "react";
 import "./Header.css";
 import { useNavigate } from "react-router-dom";
+import { CreateTypebot, UpdateTypebot} from "../api/Typebot";
+import toast, {Toaster} from "react-hot-toast";
 
 function Header({
+  userId,
   selectedbtn,
   setSelectedbtn,
   formName,
   setFormName,
   active,
   setActive,
+  typebotId,
+  setTypebotId
 }) {
   const navigate = useNavigate();
 
@@ -16,11 +21,33 @@ function Header({
     setActive(buttonId);
   };
 
-  const saveForm = () => {
+  const saveForm = async() => {
     if (formName.trim() === "") {
       alert("Form Name is required");
       return;
     }
+
+    if (!typebotId){
+      const response = await CreateTypebot(formName, selectedbtn, userId);
+      console.log(response);
+      setTypebotId(response.data.newTypebot._id);
+      if (response.status === 200) {
+        toast.success('Typebot Saved');
+      }else{
+        toast.error('Error. Try again');
+      }
+    }
+    else{
+      const response = await UpdateTypebot(typebotId, formName, selectedbtn);
+      console.log(response);
+      if (response.status === 200) {
+        toast.success('Typebot updated');
+      }else{
+        toast.error('Error. Try Updating again');
+      }
+    }
+    
+    
   };
   return (
     <>
@@ -60,6 +87,7 @@ function Header({
           <button onClick={saveForm} className="save">
             Save
           </button>
+          <Toaster position="top-center"  reverseOrder={false}/>
           <button
             onClick={(e) => {
               setSelectedbtn([]);

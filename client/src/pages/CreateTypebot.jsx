@@ -6,7 +6,7 @@ import Mainbar from "../components/Mainbar";
 import Themebar from "../components/Themebar";
 import Thememain from "../components/Thememain";
 
-function CreateTypebot({ theme, setTheme, themeId}) {
+function CreateTypebot({ userId, theme, setTheme, themeId, typebotId, setTypebotId}) {
   const [selectedbtn, setSelectedbtn] = useState([]);
   const [formName, setFormName] = useState("");
   const [active, setActive] = useState("flow");
@@ -24,8 +24,11 @@ function CreateTypebot({ theme, setTheme, themeId}) {
           setSelectedbtn={setSelectedbtn}
           formName={formName}
           setFormName={setFormName}
+          userId={userId}
           active={active}
           setActive={setActive}
+          typebotId={typebotId}
+          setTypebotId={setTypebotId}
         />
         <div
           style={{
