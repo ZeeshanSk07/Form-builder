@@ -41,9 +41,9 @@ function Mainbar({ selectedbtn, setSelectedbtn }) {
                 />
                 <div>{btn.name}</div>
                 {btn.name === "Text" ? (
-                  <input onChange={(e) => handleInputChange(index, e.target.value)} value={selectedbtn.inputs} type="text" placeholder="Click to add Text" />
+                  <input onChange={(e) => handleInputChange(index, e.target.value)} value={btn.inputs} type="text" placeholder="Click to add Text" />
                 ) : (
-                  <input onChange={(e) => handleInputChange(index, e.target.value)} value={selectedbtn.inputs} type="text" placeholder="Click to add link" />
+                  <input onChange={(e) => handleInputChange(index, e.target.value)} value={btn.inputs} type="text" placeholder="Click to add link" />
                 )}
               </div>
             );
@@ -62,7 +62,7 @@ function Mainbar({ selectedbtn, setSelectedbtn }) {
                 {btn.name === "Date" ? (
                   <p>Hint : User will select a date</p>
                 ) : btn.name === "Button" ? (
-                  <input onChange={(e) => handleInputChange(index, e.target.value)} value={selectedbtn.inputs} className="btnbot" type="text" />
+                  <input onChange={(e) => handleInputChange(index, e.target.value)} value={btn.inputs} className="btnbot" type="text" />
                 ) : btn.name === "Rating" ? (
                   <p>Hint : User will tap to rate out of 5</p>
                 ) : (

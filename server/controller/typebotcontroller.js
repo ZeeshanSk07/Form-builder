@@ -4,7 +4,8 @@ const GetTypebots = () =>{
     return async (req, res) => {
         try {
             const userId = req.params.id;
-            const typebots = await Typebot.find({userId: userId});
+            const parent = req.body;
+            const typebots = await Typebot.find({userId: userId, parent: parent});
             res.status(200).json({ 
                 message: 'typebot found',
                 typebots 
@@ -18,11 +19,12 @@ const GetTypebots = () =>{
 const CreateTypebot = () => {
     return async (req, res) => {
         try {
-            const {formName , selectedbtn, userId} = req.body;
+            const {formName , selectedbtn, userId, parent} = req.body;
             const newTypebot = new Typebot({
                 formName,
                 selectedbtn,
-                userId
+                userId,
+                parent: parent? parent : null 
              });
             await newTypebot.save();
             res.status(201).json({ message: 'Typebot Saved', newTypebot }); 

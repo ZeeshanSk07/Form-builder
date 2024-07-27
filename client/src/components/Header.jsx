@@ -13,7 +13,8 @@ function Header({
   active,
   setActive,
   typebotId,
-  setTypebotId
+  setTypebotId,
+  parent
 }) {
   const navigate = useNavigate();
 
@@ -28,10 +29,10 @@ function Header({
     }
 
     if (!typebotId){
-      const response = await CreateTypebot(formName, selectedbtn, userId);
+      const response = await CreateTypebot(formName, selectedbtn, userId, parent);
       console.log(response);
       setTypebotId(response.data.newTypebot._id);
-      if (response.status === 200) {
+      if (response.status === 201) {
         toast.success('Typebot Saved');
       }else{
         toast.error('Error. Try again');
@@ -57,6 +58,7 @@ function Header({
             style={{ visibility: active !== "flow" ? "hidden" : "visible" }}
             onChange={(e) => setFormName(e.target.value)}
             type="text"
+            value={formName}
             placeholder="Enter Form Name"
           />
         </div>

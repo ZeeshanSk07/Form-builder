@@ -1,9 +1,9 @@
 import axios from 'axios';
 const Backend_Url = 'http://localhost:4000';
 
-const CreateTypebot = async(formName, selectedbtn, userId) =>{
+const CreateTypebot = async(formName, selectedbtn, userId, parent) =>{
     try{
-        const response = await axios.post(`${Backend_Url}/typebot/saveTypebot`, {formName, selectedbtn, userId});
+        const response = await axios.post(`${Backend_Url}/typebot/saveTypebot`, {formName, selectedbtn, userId, parent});
         return response;
     }catch(err){
         return {
@@ -13,9 +13,9 @@ const CreateTypebot = async(formName, selectedbtn, userId) =>{
     }
 }
 
-const GetTypebots = async(userId) =>{
+const GetTypebots = async(userId,parent) =>{
     try{
-        const response = await axios.get(`${Backend_Url}/typebot/getTypebots/${userId}`);
+        const response = await axios.get(`${Backend_Url}/typebot/getTypebots/${userId}`,{parent});
         return response.data;
     }catch(err){
         return {

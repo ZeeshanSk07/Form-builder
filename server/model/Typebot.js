@@ -13,6 +13,9 @@ const typebotschema = new mongoose.Schema({
         type: String,
         required: (true,'UserId required'),
     },
+    parent:{
+        type:String,
+    },
     createdAt:{
         type: Date,
         default: Date.now

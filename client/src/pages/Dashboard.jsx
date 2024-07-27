@@ -7,8 +7,9 @@ import add from "../assets/dashboard/add.png";
 import { useNavigate } from "react-router-dom";
 import { CreateFolder, DeleteFolder, GetFolders } from "../api/Folders";
 import {GetTheme} from "../api/Theme";
+import { GetTypebots, DeleteTypebot } from "../api/Typebot";
 
-function Dashboard({ currentUser, setCurrentUser, userId, setUserId, setTheme, setThemeId}) {
+function Dashboard({ currentUser, setCurrentUser, userId, setUserId, parent, setParent, setTheme, setThemeId, typebotId, setTypebotId,formName, setFormName,selectedbtn, setSelectedbtn}) {
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
   const [createfold, setCreatefold] = useState(false);
   const [confirmdel, setConfirmdel] = useState(false);
@@ -16,8 +17,8 @@ function Dashboard({ currentUser, setCurrentUser, userId, setUserId, setTheme, s
   const [foldName, setFoldName] = useState('');
   const [folders, setFolders] = useState([]);
   const [foltodel, setFoltodel] = useState('');
+  const [typebot, setTypebot] = useState([]);
 
-  let arr = ['ff','dd','ee','ddd','eee','ss','kdjdhhhhfhh','cnnndndnd','hdhhdbbd'];
 
  
 useEffect(() => {
@@ -39,7 +40,6 @@ useEffect(() => {
 
  useEffect(() => {
   if (currentUser?.email) {
-    console.log(currentUser);
     setUserId(currentUser.id);
   }
 }, [currentUser]);
@@ -51,10 +51,11 @@ useEffect(() => {
     if (userId) {
       try {
         const folder = await GetFolders(userId);
-        console.log('Fetched folders:', folder); // Log the fetched folders
         setFolders(folder);
 
-        
+        const typebots = await GetTypebots(userId,parent);
+        setTypebot(typebots.typebots);
+        console.log(typebots.typebots);
 
         const themeon = await GetTheme(userId);
         setThemeId(themeon.themes._id);
@@ -78,7 +79,7 @@ useEffect(() => {
     if (response.status === 201) {
       setFoldName('');
       setCreatefold(false);
-      fetchData();  // Fetch the updated list of folders
+      fetchData();  
     }
   };
 
@@ -97,6 +98,24 @@ useEffect(() => {
     setCurrentUser('');
     navigate('/');
     localStorage.removeItem('token');
+  }
+
+  const deleteForm = async() =>{
+      const response = await DeleteTypebot(typebotId);
+      if (response.status === 200) {
+        setConfirmdelform(false);
+        fetchData();  // Fetch the updated list of folders
+      }
+  }
+
+  const editTypebot = (formid, form, btns)=>{
+    console.log('function triggered')
+    setTypebotId(formid);
+    console.log('typebotId')
+    setFormName(form);
+    console.log('form')
+    setSelectedbtn(btns);
+    navigate('/createtypebot');
   }
 
   return (
@@ -121,7 +140,7 @@ useEffect(() => {
           </div>
           <div className="scrollstrip">
             {folders.map((ele, index) => (
-              <div className="stripbox" key={index}>
+              <div key={index} onClick={()=>setParent(ele._id)} className="stripbox">
                 {ele.name}<img onClick={(e) => {setConfirmdel(true);setFoltodel(ele._id)}} src={deleteicon} alt="delete" />
               </div>
             ))}
@@ -148,8 +167,8 @@ useEffect(() => {
         {confirmdelform && (
           <div className="confirmdel">
             <h2>Are you sure you want to delete this Form?</h2>
-            <button className="confirm">Confirm</button>
-            <button onClick={() => setConfirmdelform(false)} className="cancel">Cancel</button>
+            <button onClick={deleteForm} className="confirm">Confirm</button>
+            <button onClick={(e) => {setConfirmdelform(false);setTypebotId('')}} className="cancel">Cancel</button>
           </div>
         )}
 
@@ -158,10 +177,10 @@ useEffect(() => {
             <img src={add} alt="add" />
             Create a typebot
           </div>
-          {arr.map((item, index) => (
-            <div className="formbot" key={index}>
-              <img onClick={() => setConfirmdelform(true)} src={deleteicon} alt="del" />
-              {item}
+          {typebot.map((item, index) => (
+            <div key={index} onClick={(e)=>{editTypebot(item._id, item.formName, item.selectedbtn)}} className="formbot">
+              <img onClick={(e) =>{setConfirmdelform(true);setTypebotId(item._id)}} src={deleteicon} alt="del" />
+              {item.formName}
             </div>
           ))}
         </div>
