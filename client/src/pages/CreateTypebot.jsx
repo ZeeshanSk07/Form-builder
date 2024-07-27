@@ -36,14 +36,14 @@ function CreateTypebot({ theme, setTheme, themeId}) {
                 ? "rgb(23,25,35)"
                 : theme === "blue"
                 ? "rgb(80,140,155)"
-                : "yellow",
+                : "rgb(31,31,35)",
           }}
           className="botbottom"
         >
           {active === "theme" ? (
             <>
               <Themebar theme={theme} setTheme={setTheme} themeId={themeId} />
-              <Thememain theme={theme} setTheme={setTheme} />
+              <Thememain theme={theme} />
             </>
           ) : (
             <>

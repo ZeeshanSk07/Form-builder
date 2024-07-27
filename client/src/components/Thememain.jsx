@@ -2,7 +2,7 @@ import React from "react";
 import "./Thememain.css";
 import msglogo from "../assets/theme/msglogo.png";
 
-function Thememain({ theme, setTheme }) {
+function Thememain({ theme}) {
   return (
     <>
       <div

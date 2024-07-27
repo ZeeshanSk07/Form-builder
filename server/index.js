@@ -4,7 +4,11 @@ const user = require('./routes/user');
 const createfolder = require('./routes/createfolder.js');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const dotenv = require('dotenv').config();
+const dotenv = require('dotenv');
+const createTypebot = require('./routes/createTypebot.js');
+
+dotenv.config();
+
 
 const app = express();
 app.use(cors());
@@ -12,7 +16,9 @@ const Port = 4000;
 
 app.use(bodyParser.json());
 app.use('/user', user);
+app.use('/typebot', createTypebot);
 app.use('/', createfolder);
+
 
 app.get('/health', (req, res) => {
     res.json({

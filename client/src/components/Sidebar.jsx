@@ -82,6 +82,7 @@ function Sidebar({selectedbtn, setSelectedbtn}) {
        await setSelectedbtn([...selectedbtn ,{
         name: buttonname,
         type: type,
+        inputs:'',
       }]);
   }
 
