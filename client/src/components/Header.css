@@ -80,3 +80,22 @@
   font-size: 1.5rem;
   margin-top: -1.2%;
 }
+
+.copylink {
+  position: absolute;
+  right: 0;
+  top: 9%;
+  margin-right: 9%;
+  border: 1.35px solid rgba(61, 61, 63, 1);
+  padding: 1vh 2vh 1vh 1.2vh;
+  cursor: default;
+  background-color: #18181b;
+  font-size: 1rem;
+}
+
+.copylink img {
+  margin-right: 5px;
+}
+.copylink button{
+  margin-right: 1vh;
+}

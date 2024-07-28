@@ -3,6 +3,7 @@ import "./Header.css";
 import { useNavigate } from "react-router-dom";
 import { CreateTypebot, UpdateTypebot} from "../api/Typebot";
 import toast, {Toaster} from "react-hot-toast";
+import check from '../assets/typebot/check.png';
 
 function Header({
   userId,
@@ -17,6 +18,8 @@ function Header({
   parent
 }) {
   const navigate = useNavigate();
+
+  const [share,setShare] = useState(false);
 
   const handleclick = (buttonId) => {
     setActive(buttonId);
@@ -48,8 +51,23 @@ function Header({
       }
     }
     
-    
   };
+
+  const shareTypebot = async() => {
+    const url = `https://localhost:3000/typebot/${typebotId}`;
+    try {
+      await navigator.clipboard.writeText(url);
+      console.log("URL copied to clipboard");
+      setShare(true);
+
+      setTimeout(() => {
+        setShare(false);
+      }, 3000);
+    } catch (err) {
+      console.error("Failed to copy the URL: ", err);
+      alert("Failed to copy the link. Please try again.");
+    }
+  }
   return (
     <>
       <div className="headerbot">
@@ -85,7 +103,7 @@ function Header({
         </div>
 
         <div className="buttons">
-          <button>Share</button>
+          <button onClick={shareTypebot}>Share</button>
           <button onClick={saveForm} className="save">
             Save
           </button>
@@ -100,6 +118,7 @@ function Header({
             X
           </button>
         </div>
+        { share && <div className="copylink"><img src={check} alt="link copied" />Link copied</div>}
       </div>
     </>
   );
