@@ -1,84 +1,82 @@
 :root {
-    --white: rgba(255, 255, 255, 1);
-    --gray: rgba(160, 174, 192, 1);
-    --blue: rgba(26, 95, 255, 1);
-    --outfit: "Outfit";
-    --opensans: "Open Sans";
+  --white: rgba(255, 255, 255, 1);
+  --gray: rgba(160, 174, 192, 1);
+  --blue: rgba(26, 95, 255, 1);
+  --outfit: "Outfit";
+  --opensans: "Open Sans";
 }
 
 .headerbot {
-   background-color: #18181B; 
-   height: 4vh;
-   width: 94vw;
-   margin: 0;
-   padding: 0.8% 1.5%;
-   display: flex;
-   flex-direction: row;
-   font-family: var(--outfit);
-   color: var(--white);
+  background-color: #18181b;
+  height: 4vh;
+  width: 94vw;
+  margin: 0;
+  padding: 0.8% 1.5%;
+  display: flex;
+  flex-direction: row;
+  font-family: var(--outfit);
+  color: var(--white);
 }
-.headerbot div:first-child input{
-    background-color: #37373E;
-    border: none;
-    border-radius: 6px;
-    padding: 0 10%;
-    width: 16vw;
-    margin: 1% 0 1% 10%;
-    font-size: 0.8rem;
-    color: rgb(117,117,117);
-}
-
-.headerbot div{
-    display: flex;
-    flex-direction: row;
+.headerbot div:first-child input {
+  background-color: #37373e;
+  border: none;
+  border-radius: 6px;
+  padding: 0 10%;
+  width: 16vw;
+  margin: 1% 0 1% 10%;
+  font-size: 0.8rem;
+  color: var(--gray);
 }
 
-.headerbot button:first-child{
-    background-color: #848890;
-}
-.headerbot div button:last-child{
-    color: #F55050;
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-}
-.headerbot .save{
-    background-color: rgba(74, 222, 128, 0.8);
+.headerbot div {
+  display: flex;
+  flex-direction: row;
 }
 
-.opt{
-    font-size: 1rem;
-    display: flex;
-    width: 40vw;
-    column-gap: 5%;
-    margin: auto 8% auto 27%;
+.headerbot button:first-child {
+  background-color: #848890;
 }
-.opt div{
-    display: flex;
-    padding: 1%;
-    cursor: pointer;
+.headerbot div button:last-child {
+  color: #f55050;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
 }
-
-.active{
-    border: 1px solid rgba(126, 166, 255, 1);
-    border-radius: 6px;
-    color: rgba(126, 166, 255, 1);
+.headerbot .save {
+  background-color: rgba(74, 222, 128, 0.8);
 }
 
-.buttons{
-    display: flex;
-    column-gap: 20%;  
-    margin: 0.08% 4% 0.08% 0;  
-    padding: auto ;
+.opt {
+  font-size: 1rem;
+  display: flex;
+  width: 40vw;
+  column-gap: 5%;
+  margin: auto 8% auto 27%;
 }
-.buttons button{
-    margin-right: 1%;
-    padding: 0.3% 10%;
-    font-size: 1rem;
-}
-.buttons button:last-child{
-    font-size: 1.5rem;
-    margin-top: -1.2%;
+.opt div {
+  display: flex;
+  padding: 1%;
+  cursor: pointer;
 }
 
-    
+.active {
+  border: 1px solid rgba(126, 166, 255, 1);
+  border-radius: 6px;
+  color: rgba(126, 166, 255, 1);
+}
+
+.buttons {
+  display: flex;
+  column-gap: 20%;
+  margin: 0.08% 4% 0.08% 0;
+  padding: auto;
+}
+.buttons button {
+  margin-right: 1%;
+  padding: 0.3% 10%;
+  font-size: 1rem;
+}
+.buttons button:last-child {
+  font-size: 1.5rem;
+  margin-top: -1.2%;
+}
