@@ -45,6 +45,7 @@ function Dashboard({
   useEffect(() => {
     if (userId) {
       fetchData();
+      fetchtypebot();
     }
   }, [userId]);
 
@@ -56,15 +57,15 @@ function Dashboard({
 
   useEffect(() => {
     if (parent) {
-      const fetchtypebot = async () => {
-        const typebots = await GetTypebots(userId, parent);
-        setTypebot(typebots.typebots);
-        console.log(typebots.typebots);
-      };
+      
       fetchtypebot();
     }
   }, [parent]);
-
+  const fetchtypebot = async () => {
+    const typebots = await GetTypebots(userId, parent);
+    setTypebot(typebots.typebots);
+    console.log(typebots.typebots);
+  };
   const fetchData = async () => {
     if (userId) {
       try {
@@ -96,6 +97,7 @@ function Dashboard({
       setFoldName("");
       setCreatefold(false);
       fetchData();
+      fetchtypebot();
     }
   };
 
@@ -176,7 +178,10 @@ function Dashboard({
           </h3>
         </div>
         <div className="strip">
-          <div onClick={(e) => setCreatefold(true)} className="createform">
+          <div onClick={(e) => {
+              setCreatefold(true);
+              setParent(null);
+            }} className="createform">
             <img src={create} alt="" />
             Create a folder
           </div>
@@ -256,22 +261,26 @@ function Dashboard({
             Create a typebot
           </div>
           {typebot.map((item, index) => (
-            <div
-              key={index}
-              onClick={(e) => {
-                editTypebot(item._id, item.formName, item.selectedbtn);
-              }}
-              className="formbot"
-            >
-              <img
+            <div className="formne">
+             <img
                 onClick={(e) => {
                   setConfirmdelform(true);
                   setTypebotId(item._id);
                 }}
                 src={deleteicon}
                 alt="del"
+                className="deltype"
               />
+              <div
+              key={index}
+              onClick={(e) => {
+                editTypebot(item._id, item.formName, item.selectedbtn);
+              }}
+              className="formbot"
+            >
+              
               {item.formName}
+             </div>
             </div>
           ))}
         </div>
