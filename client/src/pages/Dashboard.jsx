@@ -37,7 +37,6 @@ function Dashboard({
   useEffect(() => {
     if (currentUser) {
       fetchData();
-      fetchtypebot();
     } else {
       navigate("/login");
     }

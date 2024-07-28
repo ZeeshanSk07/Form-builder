@@ -20,7 +20,7 @@ const CreateTypebot = async (formName, selectedbtn, userId, parent) => {
   }
 };
 
-const GetTypebots = async (userId, parent) => {
+const GetTypebots = async(userId, parent) => {
   try {
     const response = await axios.get(
       `${Backend_Url}/typebot/getTypebots/${userId}`,

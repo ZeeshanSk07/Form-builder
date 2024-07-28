@@ -6,7 +6,7 @@ const GetTypebots = () => {
       const userId = req.params.id;
       const { parent } = req.query;
       console.log(`userId: ${userId}, parent: ${parent}`);
-      const typebots = await Typebot.find({ userId: userId, parent: parent });
+      const typebots = await Typebot.find({ userId: userId, parent: parent || 'null' });
       res.status(200).json({
         message: "typebot found",
         typebots,
