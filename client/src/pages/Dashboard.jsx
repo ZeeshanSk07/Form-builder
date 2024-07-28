@@ -37,6 +37,7 @@ function Dashboard({
   useEffect(() => {
     if (currentUser) {
       fetchData();
+      fetchtypebot();
     } else {
       navigate("/login");
     }
@@ -97,7 +98,6 @@ function Dashboard({
       setFoldName("");
       setCreatefold(false);
       fetchData();
-      fetchtypebot();
     }
   };
 
