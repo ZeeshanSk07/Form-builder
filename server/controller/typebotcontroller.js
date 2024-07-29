@@ -18,6 +18,19 @@ const GetTypebots = () => {
   };
 };
 
+const GetshareBot = () =>{
+  return async (req, res) => {
+    try {
+      const typebotId = req.params.id;
+      const typebot = await Typebot.findById(typebotId);
+      res.status(200).json({ message: "typebot found", typebot });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ message: error.message });
+    }
+  };
+}
+
 const CreateTypebot = () => {
   return async (req, res) => {
     try {
@@ -70,6 +83,7 @@ const DeleteTypebot = () => {
 
 module.exports = {
   GetTypebots,
+  GetshareBot,
   CreateTypebot,
   UpdateTypebot,
   DeleteTypebot,

@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
 
-const {GetTypebots, CreateTypebot, UpdateTypebot, DeleteTypebot} = require('../controller/typebotcontroller');
+const {GetTypebots, GetshareBot, CreateTypebot, UpdateTypebot, DeleteTypebot} = require('../controller/typebotcontroller');
 
 router.get('/getTypebots/:id', GetTypebots());
+router.get('/getsharebot/:id', GetshareBot());
 
 router.post('/saveTypebot', CreateTypebot());
 router.put('/editTypebot/:id', UpdateTypebot());

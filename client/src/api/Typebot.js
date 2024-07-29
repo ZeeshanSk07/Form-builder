@@ -70,4 +70,18 @@ const DeleteTypebot = async (typebotId) => {
   }
 };
 
-export { CreateTypebot, GetTypebots, UpdateTypebot, DeleteTypebot };
+const GetshareBot = async(typebotId) =>{
+  try {
+    const response = await axios.get(`${Backend_Url}/typebot/getsharebot/${typebotId}`);
+    return response;
+  } catch (err) {
+    return {
+      status: err.response? err.response.status : 500,
+      data: err.response
+       ? err.response.data
+        : { message: "Internal Server Error" },
+    };
+  }
+}
+
+export { CreateTypebot, GetTypebots, UpdateTypebot, DeleteTypebot, GetshareBot };

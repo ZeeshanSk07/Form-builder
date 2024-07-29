@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Header.css";
 import { useNavigate } from "react-router-dom";
 import { CreateTypebot, UpdateTypebot} from "../api/Typebot";
@@ -20,10 +20,16 @@ function Header({
   const navigate = useNavigate();
 
   const [share,setShare] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(true);
 
   const handleclick = (buttonId) => {
     setActive(buttonId);
   };
+  useEffect(() => {
+    if (typebotId) {
+      setIsDisabled(false);
+    }
+  },[])
 
   const saveForm = async() => {
     if (formName.trim() === "") {
@@ -37,6 +43,7 @@ function Header({
       setTypebotId(response.data.newTypebot._id);
       if (response.status === 201) {
         toast.success('Typebot Saved');
+        setIsDisabled(false);      
       }else{
         toast.error('Error. Try again');
       }
@@ -103,7 +110,7 @@ function Header({
         </div>
 
         <div className="buttons">
-          <button onClick={shareTypebot}>Share</button>
+          <button onClick={shareTypebot} disabled={isDisabled}>Share</button>
           <button onClick={saveForm} className="save">
             Save
           </button>
