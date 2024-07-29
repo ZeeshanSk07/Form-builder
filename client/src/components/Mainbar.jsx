@@ -30,6 +30,7 @@ function Mainbar({ selectedbtn, setSelectedbtn }) {
         </div>
 
         {selectedbtn.map((btn, index) => {
+          const firstname = btn.name.split(" ")[0];
           if (btn.type === "bubble") {
             return (
               <div key={index} className="askbubble">
@@ -40,7 +41,7 @@ function Mainbar({ selectedbtn, setSelectedbtn }) {
                   alt="del"
                 />
                 <div>{btn.name}</div>
-                {btn.name === "Text" ? (
+                {firstname === "Text" ? (
                   <input onChange={(e) => handleInputChange(index, e.target.value)} value={btn.inputs} type="text" placeholder="Click to add Text" />
                 ) : (
                   <input onChange={(e) => handleInputChange(index, e.target.value)} value={btn.inputs} type="text" placeholder="Click to add link" />
@@ -59,14 +60,14 @@ function Mainbar({ selectedbtn, setSelectedbtn }) {
                   alt="del"
                 />
                 <div>Input {btn.name}</div>
-                {btn.name === "Date" ? (
+                {firstname === "Date" ? (
                   <p>Hint : User will select a date</p>
-                ) : btn.name === "Button" ? (
+                ) : firstname === "Button" ? (
                   <input onChange={(e) => handleInputChange(index, e.target.value)} value={btn.inputs} className="btnbot" type="text" />
-                ) : btn.name === "Rating" ? (
+                ) : firstname === "Rating" ? (
                   <p>Hint : User will tap to rate out of 5</p>
                 ) : (
-                  <p>Hint : User will input a {btn.name} on his form</p>
+                  <p>Hint : User will input a {firstname} on his form</p>
                 )}
               </div>
             );

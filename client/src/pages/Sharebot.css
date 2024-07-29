@@ -109,7 +109,7 @@
 
 @media screen and (max-width: 500px) {
     .askbot{
-        padding:10% 3% 25vh 3%;
+        padding:10% 3% 28vh 3%;
         overflow-x: hidden;
         overflow-y:auto;
         margin: 0;

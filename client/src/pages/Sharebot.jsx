@@ -4,6 +4,7 @@ import { GetshareBot } from "../api/Typebot";
 import logo from "../assets/theme/msglogo.png";
 import send from "../assets/typebot/send.png";
 import "./Sharebot.css";
+import { saveResponse } from "../api/Response";
 
 function Sharebot() {
   const { typebotId } = useParams();
@@ -12,9 +13,7 @@ function Sharebot() {
   const [rate, setRate] = useState("");
   const [disabledInputs, setDisabledInputs] = useState({});
 
-  const [response, setResponse] = useState({
-
-  })
+  const [response, setResponse] = useState({});
 
 
   
@@ -22,6 +21,35 @@ function Sharebot() {
   useEffect(() => {
     getBot();
   }, [typebotId]);
+
+  useEffect(() => {
+    getBot();
+  }, [typebotId]);
+
+  useEffect(() => {
+    const handleBeforeUnload = (event) => {
+      saveResp();
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, [response]);
+
+  const saveResp = async () => {
+    try {
+      const post = await saveResponse(typebotId, response);
+      console.log(post);
+      if (post.status === 201) {
+        setContinueRendering(false);
+      } else {
+        console.error("Error saving response:", post);
+      }
+    } catch (error) {
+      console.error("Error saving response:", error);
+    }
+  };
 
   const getBot = async () => {
     try {
@@ -35,9 +63,18 @@ function Sharebot() {
     }
   };
 
+  const handleInputChange = (name, value) => {
+    setResponse(prev => ({ ...prev, [name]: value }));
+  };
+
+
   const handleContinueRendering = (index) => {
     setDisabledInputs((prev) => ({ ...prev, [index]: true }));
     setContinueRendering(true);
+    if (index === bot.length - 1){
+      window.alert('form submitted successfully');
+      window.location.reload();
+    }
   };
 
   return (
@@ -86,11 +123,14 @@ function Sharebot() {
               {firstname === "Text" && (
                 <>
                   <input
+                    value={response.text}
                     type="text"
+
                     className={`inputdis ${
                       disabledInputs[index] ? "disableinp" : ""
                     }`}
                     placeholder="Enter your text"
+                    onChange={(e) => handleInputChange(btn.name, e.target.value)}                   
                     disabled={!!disabledInputs[index]}
                   />
                   <button
@@ -112,6 +152,7 @@ function Sharebot() {
                       disabledInputs[index] ? "disableinp" : ""
                     }`}
                     placeholder="Select a date"
+                    onChange={(e) => handleInputChange(btn.name, e.target.value)}
                     disabled={!!disabledInputs[index]}
                   />
                   <button
@@ -133,7 +174,7 @@ function Sharebot() {
                       disabledInputs[index] ? "disableinp" : ""
                     }`}
                     placeholder="Enter a number"
-                    disabled={!!disabledInputs[index]}
+                    onChange={(e) => handleInputChange(btn.name, e.target.value)}                    disabled={!!disabledInputs[index]}
                   />
                   <button
                     className={`sendbtn ${
@@ -154,6 +195,7 @@ function Sharebot() {
                       disabledInputs[index] ? "disableinp" : ""
                     }`}
                     placeholder="Enter your email"
+                    onChange={(e) => handleInputChange(btn.name, e.target.value)}
                     disabled={!!disabledInputs[index]}
                   />
                   <button
@@ -175,6 +217,7 @@ function Sharebot() {
                       disabledInputs[index] ? "disableinp" : ""
                     }`}
                     placeholder="Enter your phone"
+                    onChange={(e) => handleInputChange(btn.name, e.target.value)}
                     disabled={!!disabledInputs[index]}
                   />
                   <button
@@ -194,7 +237,7 @@ function Sharebot() {
                     disabledInputs[index] ? "disableinp" : ""
                   }`}
                   disabled={!!disabledInputs[index]}
-                  onClick={() => handleContinueRendering(index)}
+                  onClick={() => {handleContinueRendering(index);handleInputChange(btn.name, btn.inputs)}}
                 >
                   {btn.inputs}
                 </button>
@@ -217,6 +260,7 @@ function Sharebot() {
                         }}
                         onClick={() => {
                           setRate(value.toString());
+                          handleInputChange(btn.name, value);
                         }}
                         disabled={!!disabledInputs[index]}
                       >

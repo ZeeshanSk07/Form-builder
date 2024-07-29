@@ -110,7 +110,7 @@ function Header({
         </div>
 
         <div className="buttons">
-          <button onClick={shareTypebot} disabled={isDisabled}>Share</button>
+          <button style={{backgroundColor: isDisabled ? 'rgba(119, 119, 119, 1)' : 'rgba(26, 95, 255, 1)' }} onClick={shareTypebot} disabled={isDisabled}>Share</button>
           <button onClick={saveForm} className="save">
             Save
           </button>

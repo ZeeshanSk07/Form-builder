@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const createTypebot = require('./routes/createTypebot.js');
-
+const response = require('./routes/response.js');
 dotenv.config();
 
 
@@ -18,6 +18,7 @@ app.use(bodyParser.json());
 app.use('/user', user);
 app.use('/typebot', createTypebot);
 app.use('/', createfolder);
+app.use('/response', response);
 
 
 app.get('/health', (req, res) => {
