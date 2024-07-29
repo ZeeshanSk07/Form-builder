@@ -76,15 +76,14 @@ function Sidebar({selectedbtn, setSelectedbtn}) {
 
   useEffect(() => {
     console.log(selectedbtn);
-}, [selectedbtn]);
+  }, [selectedbtn]);
 
-  const handlebtnclick = async(buttonname, type) => {
-       await setSelectedbtn([...selectedbtn ,{
-        name: buttonname,
-        type: type,
-        inputs:'',
-      }]);
-  }
+    const handlebtnclick = (buttonname, type) => {
+      const count = selectedbtn.filter(item => item.name.startsWith(buttonname) && item.type == type).length;
+      const newName = count === 0 ? buttonname + ' 1' : `${buttonname} ${count + 1}`;
+      setSelectedbtn([...selectedbtn, { name: newName, type, inputs: '' }]);
+    };
+
 
   return (
     <>

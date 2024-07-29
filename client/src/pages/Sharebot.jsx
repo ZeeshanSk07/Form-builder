@@ -10,7 +10,14 @@ function Sharebot() {
   const [bot, setBot] = useState([]);
   const [continueRendering, setContinueRendering] = useState(true);
   const [rate, setRate] = useState("");
-  const [disabledInputs, setDisabledInputs] = useState({}); // State for disabling specific inputs
+  const [disabledInputs, setDisabledInputs] = useState({});
+
+  const [response, setResponse] = useState({
+
+  })
+
+
+  
 
   useEffect(() => {
     getBot();
@@ -21,6 +28,7 @@ function Sharebot() {
       const res = await GetshareBot(typebotId);
       if (res && res.data && res.data.typebot) {
         setBot(res.data.typebot.selectedbtn);
+        
       }
     } catch (error) {
       console.error("Error fetching bot data:", error);
@@ -35,16 +43,18 @@ function Sharebot() {
   return (
     <div className="askbot">
       {bot.map((btn, index) => {
-        if (btn.type === "bubble" && continueRendering) {
+          const nameparts = btn.name.split(' ');
+          const firstname = nameparts[0];
+          if (btn.type === "bubble" && continueRendering) {
           return (
             <div key={index} className="ifbubble">
-              {btn.name === "Image" && (
+              {firstname === "Image" && (
                 <>
                   <img className="bubblelogoimg" src={logo} alt="logo" />
                   <img src={btn.inputs} alt="image" />
                 </>
               )}
-              {btn.name === "Video" && (
+              {firstname === "Video" && (
                 <>
                   <img className="bubblelogoimg" src={logo} alt="logo" />
                   <video width="600" controls autoPlay muted>
@@ -53,14 +63,14 @@ function Sharebot() {
                   </video>
                 </>
               )}
-              {btn.name === "GIF" && (
+              {firstname === "GIF" && (
                 <>
                   <img className="bubblelogoimg" src={logo} alt="logo" />
                   <img src={btn.inputs} alt="gif" />
                 </>
               )}
 
-              {btn.name === "Text" && (
+              {firstname === "Text" && (
                 <>
                   <img className="bubblelogo" src={logo} alt="logo" />
                   <div className="textbubble">{btn.inputs}</div>
@@ -73,7 +83,7 @@ function Sharebot() {
         if (btn.type === "inputs") {
           return (
             <div key={index} className="ifinput">
-              {btn.name === "Text" && (
+              {firstname === "Text" && (
                 <>
                   <input
                     type="text"
@@ -94,7 +104,7 @@ function Sharebot() {
                   </button>
                 </>
               )}
-              {btn.name === "Date" && (
+              {firstname === "Date" && (
                 <>
                   <input
                     type="date"
@@ -115,7 +125,7 @@ function Sharebot() {
                   </button>
                 </>
               )}
-              {btn.name === "Number" && (
+              {firstname === "Number" && (
                 <>
                   <input
                     type="number"
@@ -136,7 +146,7 @@ function Sharebot() {
                   </button>
                 </>
               )}
-              {btn.name === "Email" && (
+              {firstname === "Email" && (
                 <>
                   <input
                     type="email"
@@ -157,7 +167,7 @@ function Sharebot() {
                   </button>
                 </>
               )}
-              {btn.name === "Phone" && (
+              {firstname === "Phone" && (
                 <>
                   <input
                     type="tel"
@@ -178,7 +188,7 @@ function Sharebot() {
                   </button>
                 </>
               )}
-              {btn.name === "Button" && (
+              {firstname === "Button" && (
                 <button
                   className={`btnbotshare ${
                     disabledInputs[index] ? "disableinp" : ""
@@ -189,7 +199,7 @@ function Sharebot() {
                   {btn.inputs}
                 </button>
               )}
-              {btn.name === "Rating" && (
+              {firstname === "Rating" && (
                 <>
                   <div
                     className={`ratinginput ${
@@ -207,7 +217,6 @@ function Sharebot() {
                         }}
                         onClick={() => {
                           setRate(value.toString());
-                          handleContinueRendering(index);
                         }}
                         disabled={!!disabledInputs[index]}
                       >
