@@ -25,4 +25,16 @@ const sendResponse = async(req, res) => {
     }
 };
 
-module.exports = {sendResponse};
+const getResponse = async(req, res) => {
+    try {
+        const typebotId = req.params.id;
+        const response = await Response.find({ typebotId: typebotId});
+        res.json(response);
+        
+    } catch(err){
+        console.log(err);
+        return res.status(500).json({ message: 'Server error' });
+    }
+}
+
+module.exports = {sendResponse, getResponse};

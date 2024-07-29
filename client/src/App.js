@@ -10,6 +10,7 @@ import { useState } from "react";
 import CreateTypebot from "./pages/CreateTypebot";
 import Themebar from "./components/Themebar";
 import Sharebot from "./pages/Sharebot";
+import Response from "./components/Response";
 function App() {
   const [currentUser, setCurrentUser] = useState(false);
   const [userId, setUserId] = useState("");
@@ -90,6 +91,7 @@ function App() {
             }
           />
           <Route path="/typebot/:typebotId" element={<Sharebot />} />
+          <Route path="/response" element={<Response />} />
           <Route path="*" element={<Notfound />} />
         </Routes>
       </BrowserRouter>

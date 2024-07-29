@@ -15,9 +15,6 @@ function Sharebot() {
 
   const [response, setResponse] = useState({});
 
-
-  
-
   useEffect(() => {
     getBot();
   }, [typebotId]);
@@ -56,7 +53,6 @@ function Sharebot() {
       const res = await GetshareBot(typebotId);
       if (res && res.data && res.data.typebot) {
         setBot(res.data.typebot.selectedbtn);
-        
       }
     } catch (error) {
       console.error("Error fetching bot data:", error);
@@ -64,15 +60,14 @@ function Sharebot() {
   };
 
   const handleInputChange = (name, value) => {
-    setResponse(prev => ({ ...prev, [name]: value }));
+    setResponse((prev) => ({ ...prev, [name]: value }));
   };
-
 
   const handleContinueRendering = (index) => {
     setDisabledInputs((prev) => ({ ...prev, [index]: true }));
     setContinueRendering(true);
-    if (index === bot.length - 1){
-      window.alert('form submitted successfully');
+    if (index === bot.length - 1) {
+      window.alert("form submitted successfully");
       window.location.reload();
     }
   };
@@ -80,9 +75,9 @@ function Sharebot() {
   return (
     <div className="askbot">
       {bot.map((btn, index) => {
-          const nameparts = btn.name.split(' ');
-          const firstname = nameparts[0];
-          if (btn.type === "bubble" && continueRendering) {
+        const nameparts = btn.name.split(" ");
+        const firstname = nameparts[0];
+        if (continueRendering && btn.type === "bubble") {
           return (
             <div key={index} className="ifbubble">
               {firstname === "Image" && (
@@ -117,20 +112,26 @@ function Sharebot() {
           );
         }
 
-        if (btn.type === "inputs") {
+        if (btn.type === "inputs"){
+          if(btn.name === 'Text' || btn.name === 'Date' || btn.name === 'Number' || btn.name === 'Email' || btn.name === 'Phone' || btn.name === 'Button' || btn.name === 'Rating'){
+            setContinueRendering(false);
+          }
+
           return (
+            
             <div key={index} className="ifinput">
               {firstname === "Text" && (
                 <>
                   <input
                     value={response.text}
                     type="text"
-
                     className={`inputdis ${
                       disabledInputs[index] ? "disableinp" : ""
                     }`}
                     placeholder="Enter your text"
-                    onChange={(e) => handleInputChange(btn.name, e.target.value)}                   
+                    onChange={(e) =>
+                      handleInputChange(btn.name, e.target.value)
+                    }
                     disabled={!!disabledInputs[index]}
                   />
                   <button
@@ -152,7 +153,9 @@ function Sharebot() {
                       disabledInputs[index] ? "disableinp" : ""
                     }`}
                     placeholder="Select a date"
-                    onChange={(e) => handleInputChange(btn.name, e.target.value)}
+                    onChange={(e) =>
+                      handleInputChange(btn.name, e.target.value)
+                    }
                     disabled={!!disabledInputs[index]}
                   />
                   <button
@@ -174,7 +177,10 @@ function Sharebot() {
                       disabledInputs[index] ? "disableinp" : ""
                     }`}
                     placeholder="Enter a number"
-                    onChange={(e) => handleInputChange(btn.name, e.target.value)}                    disabled={!!disabledInputs[index]}
+                    onChange={(e) =>
+                      handleInputChange(btn.name, e.target.value)
+                    }
+                    disabled={!!disabledInputs[index]}
                   />
                   <button
                     className={`sendbtn ${
@@ -195,7 +201,9 @@ function Sharebot() {
                       disabledInputs[index] ? "disableinp" : ""
                     }`}
                     placeholder="Enter your email"
-                    onChange={(e) => handleInputChange(btn.name, e.target.value)}
+                    onChange={(e) =>
+                      handleInputChange(btn.name, e.target.value)
+                    }
                     disabled={!!disabledInputs[index]}
                   />
                   <button
@@ -217,7 +225,9 @@ function Sharebot() {
                       disabledInputs[index] ? "disableinp" : ""
                     }`}
                     placeholder="Enter your phone"
-                    onChange={(e) => handleInputChange(btn.name, e.target.value)}
+                    onChange={(e) =>
+                      handleInputChange(btn.name, e.target.value)
+                    }
                     disabled={!!disabledInputs[index]}
                   />
                   <button
@@ -237,7 +247,10 @@ function Sharebot() {
                     disabledInputs[index] ? "disableinp" : ""
                   }`}
                   disabled={!!disabledInputs[index]}
-                  onClick={() => {handleContinueRendering(index);handleInputChange(btn.name, btn.inputs)}}
+                  onClick={() => {
+                    handleContinueRendering(index);
+                    handleInputChange(btn.name, btn.inputs);
+                  }}
                 >
                   {btn.inputs}
                 </button>

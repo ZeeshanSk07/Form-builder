@@ -15,4 +15,17 @@ const saveResponse = async(typebotId, response) =>{
  
 }
 
-export {saveResponse};
+const getResponse = async(typebotId) => {
+    try{
+        const resp = await axios.get(`${Backend_Url}/response/getResponse/${typebotId}`);
+        console.log(resp.data);
+        resp.status(200).json(resp.data);
+    } catch (err) {
+        return {
+            status: err.response? err.response.status : 500,
+            data: err.response? err.response.data : { message: 'Internal Server Error' }
+        }
+    }
+ };
+
+export {saveResponse, getResponse};
