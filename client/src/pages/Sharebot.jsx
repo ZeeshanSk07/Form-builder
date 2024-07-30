@@ -61,6 +61,7 @@ function Sharebot() {
       if (post.status === 201) {
         toast.success("Responses saved successfully!");
         
+        
       } else {
         console.error("Error saving response:", post);
       }
@@ -159,7 +160,7 @@ function Sharebot() {
                     onChange={(e) => handleInputChange(btn.name, e.target.value)}
                     disabled={!!disabledInputs[index]}
                   />
-                  {index === currentStep && (
+                  
                     <button
                       className={`sendbtn ${disabledInputs[index] ? "disableinp" : ""}`}
                       onClick={handleContinueRendering}
@@ -167,7 +168,7 @@ function Sharebot() {
                     >
                       <img className="sendmsg" src={send} alt="send" />
                     </button>
-                  )}
+                  
                 </>
               )}
               {firstname === "Date" && (
@@ -179,7 +180,7 @@ function Sharebot() {
                     onChange={(e) => handleInputChange(btn.name, e.target.value)}
                     disabled={!!disabledInputs[index]}
                   />
-                  {index === currentStep && (
+                  
                     <button
                       className={`sendbtn ${disabledInputs[index] ? "disableinp" : ""}`}
                       onClick={handleContinueRendering}
@@ -187,7 +188,7 @@ function Sharebot() {
                     >
                       <img className="sendmsg" src={send} alt="send" />
                     </button>
-                  )}
+                  
                 </>
               )}
               {firstname === "Number" && (
@@ -199,7 +200,7 @@ function Sharebot() {
                     onChange={(e) => handleInputChange(btn.name, e.target.value)}
                     disabled={!!disabledInputs[index]}
                   />
-                  {index === currentStep && (
+                  
                     <button
                       className={`sendbtn ${disabledInputs[index] ? "disableinp" : ""}`}
                       onClick={handleContinueRendering}
@@ -207,7 +208,7 @@ function Sharebot() {
                     >
                       <img className="sendmsg" src={send} alt="send" />
                     </button>
-                  )}
+                  
                 </>
               )}
               {firstname === "Email" && (
@@ -219,7 +220,7 @@ function Sharebot() {
                     onChange={(e) => handleInputChange(btn.name, e.target.value)}
                     disabled={!!disabledInputs[index]}
                   />
-                  {index === currentStep && (
+                  
                     <button
                       className={`sendbtn ${disabledInputs[index] ? "disableinp" : ""}`}
                       onClick={handleContinueRendering}
@@ -227,7 +228,7 @@ function Sharebot() {
                     >
                       <img className="sendmsg" src={send} alt="send" />
                     </button>
-                  )}
+                  
                 </>
               )}
               {firstname === "Phone" && (
@@ -239,7 +240,7 @@ function Sharebot() {
                     onChange={(e) => handleInputChange(btn.name, e.target.value)}
                     disabled={!!disabledInputs[index]}
                   />
-                  {index === currentStep && (
+                  
                     <button
                       className={`sendbtn ${disabledInputs[index] ? "disableinp" : ""}`}
                       onClick={handleContinueRendering}
@@ -247,7 +248,7 @@ function Sharebot() {
                     >
                       <img className="sendmsg" src={send} alt="send" />
                     </button>
-                  )}
+                  
                 </>
               )}
               {firstname === "Button" && (
@@ -286,7 +287,7 @@ function Sharebot() {
                       </button>
                     ))}
                   </div>
-                  {index === currentStep && (
+                  
                     <button
                       className={`sendbtn ${disabledInputs[index] ? "disableinp" : ""}`}
                       onClick={handleContinueRendering}
@@ -294,7 +295,7 @@ function Sharebot() {
                     >
                       <img className="sendmsg" src={send} alt="send" />
                     </button>
-                  )}
+                  
                 </>
               )}
               <Toaster position="top-center" reverseOrder={false} />
