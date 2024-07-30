@@ -7,6 +7,8 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const createTypebot = require('./routes/createTypebot.js');
 const response = require('./routes/response.js');
+const cookieParser = require('cookie-parser');
+const {verifyToken} = require('./middlewares/verifytoken.js');
 dotenv.config();
 
 
@@ -14,12 +16,18 @@ const app = express();
 app.use(cors());
 const Port = 4000;
 
+app.use(cookieParser()); 
+
 app.use(bodyParser.json());
 app.use('/user', user);
 app.use('/typebot', createTypebot);
 app.use('/', createfolder);
 app.use('/response', response);
 
+
+app.post('/auth/restore-session', verifyToken, (req, res) => {
+    res.json({ message: 'Session restored', user: req.user });
+  });
 
 app.get('/health', (req, res) => {
     res.json({

@@ -50,7 +50,7 @@ function CreateTypebot({ userId, selectedbtn, setSelectedbtn, formName, setFormN
             </>
           ) : active === 'response' ?
               <Response typebotId={typebotId}
-          setTypebotId={setTypebotId} />
+          setTypebotId={setTypebotId} selectedbtn={selectedbtn}/>
            :
             <>
               <Sidebar

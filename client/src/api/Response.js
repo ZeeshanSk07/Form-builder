@@ -18,8 +18,8 @@ const saveResponse = async(typebotId, response) =>{
 const getResponse = async(typebotId) => {
     try{
         const resp = await axios.get(`${Backend_Url}/response/getResponse/${typebotId}`);
-        console.log(resp.data);
-        resp.status(200).json(resp.data);
+        console.log(resp);
+        return resp;
     } catch (err) {
         return {
             status: err.response? err.response.status : 500,
