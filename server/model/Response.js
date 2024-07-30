@@ -6,7 +6,7 @@ const responseSchema = new mongoose.Schema({
         required: true
     },
     response : {
-        type: Object,
+        type: Array,
         required: true
     },
     createdAt: {

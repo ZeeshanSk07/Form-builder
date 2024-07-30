@@ -260,7 +260,7 @@ function Dashboard({
             Create a typebot
           </div>
           {typebot.map((item, index) => (
-            <div className="formne">
+            <div key={index} className="formne">
              <img
                 onClick={(e) => {
                   setConfirmdelform(true);

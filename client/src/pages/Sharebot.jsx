@@ -5,6 +5,7 @@ import logo from "../assets/theme/msglogo.png";
 import send from "../assets/typebot/send.png";
 import "./Sharebot.css";
 import { saveResponse } from "../api/Response";
+import axios from 'axios';
 
 function Sharebot() {
   const { typebotId } = useParams();
@@ -13,7 +14,7 @@ function Sharebot() {
   const [rate, setRate] = useState("");
   const [disabledInputs, setDisabledInputs] = useState({});
 
-  const [response, setResponse] = useState({});
+  const [response, setResponse] = useState([]);
 
   useEffect(() => {
     getBot();
@@ -25,7 +26,10 @@ function Sharebot() {
 
   useEffect(() => {
     const handleBeforeUnload = (event) => {
-      saveResp();
+      if (response.length !== 0 ) {
+        saveResp();
+      }
+      
     };
 
     window.addEventListener("beforeunload", handleBeforeUnload);
@@ -33,6 +37,18 @@ function Sharebot() {
       window.removeEventListener("beforeunload", handleBeforeUnload);
     };
   }, [response]);
+  
+  useEffect(() => {
+    const recordPageView = async () => {
+      try {
+        await axios.post('http://localhost:4000/response/view', { pageId: typebotId });
+      } catch (error) {
+        console.error('Failed to record view:', error);
+      }
+    };
+
+    recordPageView();
+  }, []);
 
   const saveResp = async () => {
     try {

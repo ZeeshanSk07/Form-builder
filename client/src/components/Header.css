@@ -13,6 +13,7 @@
   margin: 0;
   padding: 0.8% 1.5%;
   display: flex;
+  border: 2px solid rgba(44, 44, 47, 1);
   flex-direction: row;
   font-family: var(--outfit);
   color: var(--white);
