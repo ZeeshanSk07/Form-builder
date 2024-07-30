@@ -7,30 +7,34 @@ import "./Sharebot.css";
 import { saveResponse } from "../api/Response";
 import axios from 'axios';
 import toast, { Toaster } from 'react-hot-toast';
+import {useNavigate} from 'react-router-dom';
 
 function Sharebot() {
   const { typebotId } = useParams();
   const [bot, setBot] = useState([]);
-  const [continueRendering, setContinueRendering] = useState(true);
+  const [currentStep, setCurrentStep] = useState(0);
   const [rate, setRate] = useState("");
   const [disabledInputs, setDisabledInputs] = useState({});
 
   const [response, setResponse] = useState([]);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     getBot();
   }, [typebotId]);
 
   useEffect(() => {
-    getBot();
-  }, [typebotId]);
+    if (currentStep === bot.length) {
+      saveResp();
+    }
+  },[currentStep])
 
   useEffect(() => {
     const handleBeforeUnload = (event) => {
-      if (response.length !== 0 ) {
+      if (response.length !== 0) {
         saveResp();
       }
-      
     };
 
     window.addEventListener("beforeunload", handleBeforeUnload);
@@ -38,7 +42,7 @@ function Sharebot() {
       window.removeEventListener("beforeunload", handleBeforeUnload);
     };
   }, [response]);
-  
+
   useEffect(() => {
     const recordPageView = async () => {
       try {
@@ -54,9 +58,9 @@ function Sharebot() {
   const saveResp = async () => {
     try {
       const post = await saveResponse(typebotId, response);
-      console.log(post);
       if (post.status === 201) {
-        setContinueRendering(false);
+        toast.success("Responses saved successfully!");
+        
       } else {
         console.error("Error saving response:", post);
       }
@@ -80,25 +84,34 @@ function Sharebot() {
     setResponse((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleContinueRendering = (index) => {
-    setDisabledInputs((prev) => ({ ...prev, [index]: true }));
-    setContinueRendering(true);
-    if (index === bot.length - 1) {
-      toast.success("form submitted successfully");
-
-      setInterval(() => {
-        window.location.reload();
-      },800);
-      
-    }
+  const handleContinueRendering = () => {
+    setDisabledInputs((prev) => ({ ...prev, [currentStep]: true }));
+    setCurrentStep((prevStep) => prevStep + 1);
   };
+
+  useEffect(() => {
+    if (bot.length > 0 && currentStep < bot.length) {
+      const currentBtn = bot[currentStep];
+
+      if (currentBtn.type === "bubble") {
+        const timer = setTimeout(() => {
+          setCurrentStep((prevStep) => prevStep + 1);
+        }, 1000); // 1 second delay for bubbles
+
+        return () => clearTimeout(timer);
+      }
+    }
+  }, [currentStep, bot]);
 
   return (
     <div className="askbot">
       {bot.map((btn, index) => {
         const nameparts = btn.name.split(" ");
         const firstname = nameparts[0];
-        if (continueRendering && btn.type === "bubble") {
+
+        if (index > currentStep) return null;
+
+        if (btn.type === "bubble") {
           return (
             <div key={index} className="ifbubble">
               {firstname === "Image" && (
@@ -133,143 +146,116 @@ function Sharebot() {
           );
         }
 
-        if (btn.type === "inputs"){
-          if(btn.name === 'Text' || btn.name === 'Date' || btn.name === 'Number' || btn.name === 'Email' || btn.name === 'Phone' || btn.name === 'Button' || btn.name === 'Rating'){
-            setContinueRendering(false);
-          }
-
+        if (btn.type === "inputs") {
           return (
-            
             <div key={index} className="ifinput">
               {firstname === "Text" && (
                 <>
                   <input
-                    value={response.text}
+                    value={response[btn.name] || ""}
                     type="text"
-                    className={`inputdis ${
-                      disabledInputs[index] ? "disableinp" : ""
-                    }`}
+                    className={`inputdis ${disabledInputs[index] ? "disableinp" : ""}`}
                     placeholder="Enter your text"
-                    onChange={(e) =>
-                      handleInputChange(btn.name, e.target.value)
-                    }
+                    onChange={(e) => handleInputChange(btn.name, e.target.value)}
                     disabled={!!disabledInputs[index]}
                   />
-                  <button
-                    className={`sendbtn ${
-                      disabledInputs[index] ? "disableinp" : ""
-                    }`}
-                    onClick={() => handleContinueRendering(index)}
-                    disabled={!!disabledInputs[index]}
-                  >
-                    <img className="sendmsg" src={send} alt="send" />
-                  </button>
+                  {index === currentStep && (
+                    <button
+                      className={`sendbtn ${disabledInputs[index] ? "disableinp" : ""}`}
+                      onClick={handleContinueRendering}
+                      disabled={!!disabledInputs[index]}
+                    >
+                      <img className="sendmsg" src={send} alt="send" />
+                    </button>
+                  )}
                 </>
               )}
               {firstname === "Date" && (
                 <>
                   <input
                     type="date"
-                    className={`inputdis ${
-                      disabledInputs[index] ? "disableinp" : ""
-                    }`}
+                    className={`inputdis ${disabledInputs[index] ? "disableinp" : ""}`}
                     placeholder="Select a date"
-                    onChange={(e) =>
-                      handleInputChange(btn.name, e.target.value)
-                    }
+                    onChange={(e) => handleInputChange(btn.name, e.target.value)}
                     disabled={!!disabledInputs[index]}
                   />
-                  <button
-                    className={`sendbtn ${
-                      disabledInputs[index] ? "disableinp" : ""
-                    }`}
-                    onClick={() => handleContinueRendering(index)}
-                    disabled={!!disabledInputs[index]}
-                  >
-                    <img className="sendmsg" src={send} alt="send" />
-                  </button>
+                  {index === currentStep && (
+                    <button
+                      className={`sendbtn ${disabledInputs[index] ? "disableinp" : ""}`}
+                      onClick={handleContinueRendering}
+                      disabled={!!disabledInputs[index]}
+                    >
+                      <img className="sendmsg" src={send} alt="send" />
+                    </button>
+                  )}
                 </>
               )}
               {firstname === "Number" && (
                 <>
                   <input
                     type="number"
-                    className={`inputdis ${
-                      disabledInputs[index] ? "disableinp" : ""
-                    }`}
+                    className={`inputdis ${disabledInputs[index] ? "disableinp" : ""}`}
                     placeholder="Enter a number"
-                    onChange={(e) =>
-                      handleInputChange(btn.name, e.target.value)
-                    }
+                    onChange={(e) => handleInputChange(btn.name, e.target.value)}
                     disabled={!!disabledInputs[index]}
                   />
-                  <button
-                    className={`sendbtn ${
-                      disabledInputs[index] ? "disableinp" : ""
-                    }`}
-                    onClick={() => handleContinueRendering(index)}
-                    disabled={!!disabledInputs[index]}
-                  >
-                    <img className="sendmsg" src={send} alt="send" />
-                  </button>
+                  {index === currentStep && (
+                    <button
+                      className={`sendbtn ${disabledInputs[index] ? "disableinp" : ""}`}
+                      onClick={handleContinueRendering}
+                      disabled={!!disabledInputs[index]}
+                    >
+                      <img className="sendmsg" src={send} alt="send" />
+                    </button>
+                  )}
                 </>
               )}
               {firstname === "Email" && (
                 <>
                   <input
                     type="email"
-                    className={`inputdis ${
-                      disabledInputs[index] ? "disableinp" : ""
-                    }`}
+                    className={`inputdis ${disabledInputs[index] ? "disableinp" : ""}`}
                     placeholder="Enter your email"
-                    onChange={(e) =>
-                      handleInputChange(btn.name, e.target.value)
-                    }
+                    onChange={(e) => handleInputChange(btn.name, e.target.value)}
                     disabled={!!disabledInputs[index]}
                   />
-                  <button
-                    className={`sendbtn ${
-                      disabledInputs[index] ? "disableinp" : ""
-                    }`}
-                    onClick={() => handleContinueRendering(index)}
-                    disabled={!!disabledInputs[index]}
-                  >
-                    <img className="sendmsg" src={send} alt="send" />
-                  </button>
+                  {index === currentStep && (
+                    <button
+                      className={`sendbtn ${disabledInputs[index] ? "disableinp" : ""}`}
+                      onClick={handleContinueRendering}
+                      disabled={!!disabledInputs[index]}
+                    >
+                      <img className="sendmsg" src={send} alt="send" />
+                    </button>
+                  )}
                 </>
               )}
               {firstname === "Phone" && (
                 <>
                   <input
                     type="tel"
-                    className={`inputdis ${
-                      disabledInputs[index] ? "disableinp" : ""
-                    }`}
+                    className={`inputdis ${disabledInputs[index] ? "disableinp" : ""}`}
                     placeholder="Enter your phone"
-                    onChange={(e) =>
-                      handleInputChange(btn.name, e.target.value)
-                    }
+                    onChange={(e) => handleInputChange(btn.name, e.target.value)}
                     disabled={!!disabledInputs[index]}
                   />
-                  <button
-                    className={`sendbtn ${
-                      disabledInputs[index] ? "disableinp" : ""
-                    }`}
-                    onClick={() => handleContinueRendering(index)}
-                    disabled={!!disabledInputs[index]}
-                  >
-                    <img className="sendmsg" src={send} alt="send" />
-                  </button>
+                  {index === currentStep && (
+                    <button
+                      className={`sendbtn ${disabledInputs[index] ? "disableinp" : ""}`}
+                      onClick={handleContinueRendering}
+                      disabled={!!disabledInputs[index]}
+                    >
+                      <img className="sendmsg" src={send} alt="send" />
+                    </button>
+                  )}
                 </>
               )}
               {firstname === "Button" && (
                 <button
-                  className={`btnbotshare ${
-                    disabledInputs[index] ? "disableinp" : ""
-                  }`}
+                  className={`btnbotshare ${disabledInputs[index] ? "disableinp" : ""}`}
                   disabled={!!disabledInputs[index]}
                   onClick={() => {
-                    handleContinueRendering(index);
+                    handleContinueRendering();
                     handleInputChange(btn.name, btn.inputs);
                   }}
                 >
@@ -279,9 +265,7 @@ function Sharebot() {
               {firstname === "Rating" && (
                 <>
                   <div
-                    className={`ratinginput ${
-                      disabledInputs[index] ? "disableinp" : ""
-                    }`}
+                    className={`ratinginput ${disabledInputs[index] ? "disableinp" : ""}`}
                   >
                     {[1, 2, 3, 4, 5].map((value) => (
                       <button
@@ -302,15 +286,15 @@ function Sharebot() {
                       </button>
                     ))}
                   </div>
-                  <button
-                    className={`sendbtn ${
-                      disabledInputs[index] ? "disableinp" : ""
-                    }`}
-                    onClick={() => handleContinueRendering(index)}
-                    disabled={!!disabledInputs[index]}
-                  >
-                    <img className="sendmsg" src={send} alt="send" />
-                  </button>
+                  {index === currentStep && (
+                    <button
+                      className={`sendbtn ${disabledInputs[index] ? "disableinp" : ""}`}
+                      onClick={handleContinueRendering}
+                      disabled={!!disabledInputs[index]}
+                    >
+                      <img className="sendmsg" src={send} alt="send" />
+                    </button>
+                  )}
                 </>
               )}
               <Toaster position="top-center" reverseOrder={false} />
