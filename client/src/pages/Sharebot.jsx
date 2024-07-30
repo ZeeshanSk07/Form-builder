@@ -6,6 +6,7 @@ import send from "../assets/typebot/send.png";
 import "./Sharebot.css";
 import { saveResponse } from "../api/Response";
 import axios from 'axios';
+import toast, { Toaster } from 'react-hot-toast';
 
 function Sharebot() {
   const { typebotId } = useParams();
@@ -83,8 +84,12 @@ function Sharebot() {
     setDisabledInputs((prev) => ({ ...prev, [index]: true }));
     setContinueRendering(true);
     if (index === bot.length - 1) {
-      window.alert("form submitted successfully");
-      window.location.reload();
+      toast.success("form submitted successfully");
+
+      setInterval(() => {
+        window.location.reload();
+      },800);
+      
     }
   };
 
@@ -308,6 +313,7 @@ function Sharebot() {
                   </button>
                 </>
               )}
+              <Toaster position="top-center" reverseOrder={false} />
             </div>
           );
         }
