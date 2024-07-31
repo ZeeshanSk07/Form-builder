@@ -4,7 +4,7 @@ import arrow from "../assets/login/arrow_back.png";
 import semicircle from "../assets/login/Ellipse 1.png";
 import vercircle from "../assets/login/Ellipse 2.png";
 import triangle from "../assets/login/Group 2 (1).png";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { Login } from '../api/User';
 import toast, { Toaster } from 'react-hot-toast';
 
@@ -59,7 +59,7 @@ function LoginPage({currentUser,setCurrentUser}) {
                         <button onClick={handleLogin}>Log In</button>
                         <Toaster position="top-center" reverseOrder={false} />
                         <p>
-                            Don't have an account? <a href="/signup">Register now</a>
+                            Don't have an account? <Link to="/signup">Register now</Link>
                         </p>
                     </div>
                     <img src={vercircle} alt="Vertical circle" />

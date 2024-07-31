@@ -1,6 +1,5 @@
 import axios from 'axios';
 
-const Backend_Url = 'http://localhost:4000';
 
 const Login = async (email, password) => {
     try {
