@@ -134,7 +134,7 @@ const calculateCompletionRate = (result) => {
                 {selectedbtn.map((btn, btnIndex) =>
                   btn.type === 'inputs' ? (
                     <td key={btnIndex}>
-                      {res.response[0][btn.name] || ''}
+                    {res.response && res.response[0] && res.response[0][btn.name] ? res.response[0][btn.name] : ''}
                     </td>
                   ) : null
                 )}
