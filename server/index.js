@@ -40,7 +40,12 @@ app.get('/health', (req, res) => {
     });
 })
 
-mongoose.connect(process.env.Mongo_Url)
+const dbURI = process.env.MONGODB_URI || 'your_default_fallback_uri_here';
+
+mongoose.connect(dbURI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
     .then(() => {
         console.log('Database connected');
     })
