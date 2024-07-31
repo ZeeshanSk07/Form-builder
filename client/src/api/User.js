@@ -4,7 +4,7 @@ const Backend_Url = 'http://localhost:4000';
 
 const Login = async (email, password) => {
     try {
-        const response = await axios.post(`/user/login`, { email, password });
+        const response = await axios.post(`/user/log`, { email, password });
         return response;
     } catch (err) {
         return {
@@ -16,7 +16,7 @@ const Login = async (email, password) => {
 
 const Signup = async (username, email, password) => {
     try {
-        const response = await axios.post(`/user/signup`, { username, email, password });
+        const response = await axios.post(`/user/register`, { username, email, password });
         return response;
     } catch (err) {
         return {
