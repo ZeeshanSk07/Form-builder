@@ -11,7 +11,7 @@ const {verifyToken} = require('./middlewares/verifytoken.js');
 const path = require('path');
 dotenv.config();
 
-const Port = 4000;
+const Port = 3000;
 
 const app = express();
 app.use(cors({
