@@ -1,9 +1,9 @@
 import axios from "axios";
-const Backend_Url = "http://localhost:4000";
+const Backend_Url = "https://form-builder-e94g.onrender.com";
 
 const CreateTypebot = async (formName, selectedbtn, userId, parent) => {
   try {
-    const response = await axios.post(`/typebot/saveTypebot`, {
+    const response = await axios.post(`${Backend_Url}/typebot/saveTypebot`, {
       formName,
       selectedbtn,
       userId,
@@ -22,8 +22,7 @@ const CreateTypebot = async (formName, selectedbtn, userId, parent) => {
 
 const GetTypebots = async(userId, parent) => {
   try {
-    const response = await axios.get(`
-      /typebot/getTypebots/${userId}`,
+    const response = await axios.get(`${Backend_Url}/typebot/getTypebots/${userId}`,
       { params: { parent } }
     );
     return response.data;
@@ -41,7 +40,7 @@ const GetTypebots = async(userId, parent) => {
 const UpdateTypebot = async (typebotId, formName, selectedbtn) => {
   try {
     const response = await axios.put(
-      `/typebot/editTypebot/${typebotId}`,
+      `${Backend_Url}/typebot/editTypebot/${typebotId}`,
       { formName, selectedbtn }
     );
     return response;
@@ -58,7 +57,7 @@ const UpdateTypebot = async (typebotId, formName, selectedbtn) => {
 const DeleteTypebot = async (typebotId) => {
   try {
     const response = await axios.delete(
-      `/typebot/deleteTypebot/${typebotId}`
+      `${Backend_Url}/typebot/deleteTypebot/${typebotId}`
     );
     return response;
   } catch (err) {
@@ -73,7 +72,7 @@ const DeleteTypebot = async (typebotId) => {
 
 const GetshareBot = async(typebotId) =>{
   try {
-    const response = await axios.get(`/typebot/getsharebot/${typebotId}`);
+    const response = await axios.get(`${Backend_Url}/typebot/getsharebot/${typebotId}`);
     return response;
   } catch (err) {
     return {

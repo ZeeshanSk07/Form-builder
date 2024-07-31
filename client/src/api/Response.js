@@ -1,10 +1,10 @@
 import axios from 'axios';
 
-const Backend_Url = 'http://localhost:4000';
+const Backend_Url = 'https://form-builder-e94g.onrender.com';
 
 const saveResponse = async(typebotId, response) =>{
     try{
-        const resp = await axios.post(`/response/bot/${typebotId}`, { response });
+        const resp = await axios.post(`${Backend_Url}/response/bot/${typebotId}`, { response });
         return resp;
     } catch (err) {
         return {
@@ -17,7 +17,7 @@ const saveResponse = async(typebotId, response) =>{
 
 const getResponse = async(typebotId) => {
     try{
-        const resp = await axios.get(`/response/getResponse/${typebotId}`);
+        const resp = await axios.get(`${Backend_Url}/response/getResponse/${typebotId}`);
         console.log(resp);
         return resp;
     } catch (err) {

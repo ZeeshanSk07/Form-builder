@@ -1,9 +1,11 @@
 import axios from 'axios';
 
+const Backend_Url = 'https://form-builder-e94g.onrender.com';
+
 
 const Login = async (email, password) => {
     try {
-        const response = await axios.post(`/user/login`, { email, password });
+        const response = await axios.post(`${Backend_Url}/user/login`, { email, password });
         return response;
     } catch (err) {
         return {
@@ -15,7 +17,8 @@ const Login = async (email, password) => {
 
 const Signup = async (username, email, password) => {
     try {
-        const response = await axios.post(`/user/signup`, { username, email, password });
+        const response = await axios.post(`${Backend_Url}/user/signup`, { username, email, password });
+        console.log(response);
         return response;
     } catch (err) {
         return {
@@ -27,7 +30,7 @@ const Signup = async (username, email, password) => {
 
 const Updateuser = async(userId, updusername, updemail, oldpassword, newpassword) => {
     try {
-        const response = await axios.put(`/user/update/${userId}`, { updusername, updemail, oldpassword, newpassword });
+        const response = await axios.put(`${Backend_Url}/user/update/${userId}`, { updusername, updemail, oldpassword, newpassword });
         return response;
     } catch (err) {
         return {
@@ -39,7 +42,7 @@ const Updateuser = async(userId, updusername, updemail, oldpassword, newpassword
 
 const verifyToken = async (token) => {
     try {
-      const response = await axios.get(`/verifytoken`, {
+      const response = await axios.get(`${Backend_Url}/verifytoken`, {
         headers: { 'Authorization': token }
       });
       
