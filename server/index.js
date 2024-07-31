@@ -16,9 +16,6 @@ dotenv.config();
 const app = express();
 app.use(cors());
 const Port = 4000;
-
-app.use(cookieParser()); 
-
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(bodyParser.json());
@@ -28,17 +25,7 @@ app.use('/', createfolder);
 app.use('/response', response);
 
 
-app.post('/auth/restore-session', verifyToken, (req, res) => {
-    res.json({ message: 'Session restored', user: req.user });
-  });
 
-app.get('/health', (req, res) => {
-    res.json({
-        message: 'Job listing API is working fine',
-        status: 'Working',
-        date: new Date().toLocaleDateString()
-    });
-})
 
 mongoose.connect(process.env.MONGO_URL)
     .then(() => {
@@ -47,6 +34,20 @@ mongoose.connect(process.env.MONGO_URL)
     .catch(err => {
         console.log('Error connecting to database:', err);
     });
+
+    app.get('/health', (req, res) => {
+        res.json({
+            message: 'Job listing API is working fine',
+            status: 'Working',
+            date: new Date().toLocaleDateString()
+        });
+    })
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+
 
 app.use("*", (req, res) => {
     res.status(404).json({
