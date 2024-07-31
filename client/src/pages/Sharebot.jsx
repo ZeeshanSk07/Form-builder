@@ -44,7 +44,7 @@ function Sharebot() {
   useEffect(() => {
     const recordPageView = async () => {
       try {
-        await axios.post('http://localhost:4000/response/view', { pageId: typebotId });
+        await axios.post('https://form-builder-e94g.onrender.com/response/view', { pageId: typebotId });
       } catch (error) {
         console.error('Failed to record view:', error);
       }
