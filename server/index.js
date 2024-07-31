@@ -7,19 +7,13 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const createTypebot = require('./routes/createTypebot.js');
 const response = require('./routes/response.js');
-const {verifyToken} = require('./middlewares/verifytoken.js');
-const path = require('path');
 dotenv.config();
 
 const Port = 3000;
 
 const app = express();
-app.use(cors({
-    origin: 'https://form-builder-three-mu.vercel.app/', // Replace with your frontend domain
-  }));
+app.use(cors());
 app.use(express.json());
-
-app.use(express.static(path.join(__dirname, 'public')));
 
 
 app.use(bodyParser.json());
@@ -39,9 +33,6 @@ app.use('/', createfolder);
 app.use('/response', response);
 
 
-app.post('/auth/restore-session', verifyToken, (req, res) => {
-    res.json({ message: 'Session restored', user: req.user });
-  });
 
 app.get('/health', (req, res) => {
     res.json({
