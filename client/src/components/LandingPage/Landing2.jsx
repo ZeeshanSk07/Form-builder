@@ -1,7 +1,7 @@
 import React from "react";
 import "./Landing2.css";
 import landing2 from "../../assets/Landing2.png";
-import landingbottom from "../../assets/landing bottom.png";
+import landingbottom from "../../assets/landingbottom.png";
 
 function Landing2() {
   return (
