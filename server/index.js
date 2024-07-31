@@ -40,7 +40,7 @@ app.get('/health', (req, res) => {
     });
 })
 
-const dbURI = process.env.MONGODB_URI || 'your_default_fallback_uri_here';
+const dbURI = process.env.MONGO_URL || 'your_default_fallback_uri_here';
 
 mongoose.connect(dbURI, {
     useNewUrlParser: true,
