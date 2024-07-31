@@ -3,6 +3,7 @@
     flex-direction: column;
     padding: 5% 15%;
     flex-wrap: nowrap;
+    min-height: 100vh;
     height: fit-content; 
     overflow-y: scroll;
     scrollbar-width: none;

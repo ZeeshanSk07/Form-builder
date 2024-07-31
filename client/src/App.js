@@ -19,7 +19,7 @@ function App() {
   const [typebotId, setTypebotId] = useState("");
   const [formName, setFormName] = useState("");
   const [selectedbtn, setSelectedbtn] = useState([]);
-  const [parent, setParent] = useState('');
+  const [parent, setParent] = useState(null);
 
   return (
     <>

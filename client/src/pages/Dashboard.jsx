@@ -37,17 +37,18 @@ function Dashboard({
   useEffect(() => {
     if (currentUser) {
       fetchData();
+      fetchtypebot();
     } else {
       navigate("/login");
     }
   }, []);
 
   useEffect(() => {
-    if (userId) {
-      fetchData();
-      fetchtypebot();
-    }
-  }, [userId]);
+  if (currentUser && userId && parent !== undefined) {
+    fetchData();
+    fetchtypebot();
+  }
+}, [userId, parent]);
 
   useEffect(() => {
     if (currentUser?.email) {
@@ -55,26 +56,31 @@ function Dashboard({
     }
   }, [currentUser]);
 
-  useEffect(() => {
-    if (parent) {
-      
-      fetchtypebot();
-    }
-  }, [parent]);
+  
   const fetchtypebot = async () => {
-    const typebots = await GetTypebots(userId, parent);
-    setTypebot(typebots.typebots);
-    console.log(typebots.typebots);
+    try {
+      const response = await GetTypebots(userId, parent);
+      if (response && response.typebots) {
+        setTypebot(response.typebots);
+      } else {
+        console.log("Typebots data not found or empty:", response);
+        setTypebot([]); // Optional: set an empty array if no typebots found
+      }
+    } catch (error) {
+      console.error("Error fetching typebots:", error);
+      setTypebot([]); // Optional: set an empty array on error
+    }
   };
+
   const fetchData = async () => {
     if (userId) {
       try {
         const folder = await GetFolders(userId);
         setFolders(folder);
 
-        const typebots = await GetTypebots(userId, parent);
-        setTypebot(typebots.typebots);
-        console.log(typebots.typebots);
+        // const typebots = await GetTypebots(userId, parent);
+        // setTypebot(typebots.typebots);
+        // console.log(typebots.typebots);
 
         const themeon = await GetTheme(userId);
         setThemeId(themeon.themes._id);
@@ -97,6 +103,7 @@ function Dashboard({
       setFoldName("");
       setCreatefold(false);
       fetchData();
+      fetchtypebot();
     }
   };
 
@@ -105,7 +112,8 @@ function Dashboard({
       const response = await DeleteFolder(foltodel);
       if (response.status === 200) {
         setConfirmdel(false);
-        fetchData(); // Fetch the updated list of folders
+        fetchData();
+        fetchtypebot();
       }
     }
   };
@@ -121,6 +129,7 @@ function Dashboard({
     if (response.status === 200) {
       setConfirmdelform(false);
       fetchData(); // Fetch the updated list of folders
+      fetchtypebot();
     }
   };
 
@@ -135,7 +144,7 @@ function Dashboard({
   };
 
   const settparent = (folId) => {
-    setParent(folId);
+    setParent(folId || null);
   };
 
   const createbot = () => {
@@ -144,6 +153,11 @@ function Dashboard({
     setSelectedbtn([]);
     navigate("/createtypebot");
   };
+
+  const createFolderHandler = () => {
+  setParent(null); 
+  setCreatefold(true);
+};
 
   return (
     <>
@@ -177,10 +191,7 @@ function Dashboard({
           </h3>
         </div>
         <div className="strip">
-          <div onClick={(e) => {
-              setCreatefold(true);
-              setParent(null);
-            }} className="createform">
+          <div onClick={createFolderHandler} className="createform">
             <img src={create} alt="" />
             Create a folder
           </div>

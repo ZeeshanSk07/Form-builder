@@ -4,9 +4,19 @@ const GetTypebots = () => {
   return async (req, res) => {
     try {
       const userId = req.params.id;
-      const { parent } = req.query;
-      console.log(`userId: ${userId}, parent: ${parent}`);
-      const typebots = await Typebot.find({ userId: userId, parent: parent || 'null' });
+      let { parent } = req.query;
+
+      // Convert 'null' string to actual null
+      if (parent === 'null') {
+        parent = null;
+      }
+
+      // Find typebots with either a null parent or the specified parent
+      const typebots = await Typebot.find({
+        userId: userId,
+        parent: parent,
+      });
+
       res.status(200).json({
         message: "typebot found",
         typebots,
@@ -17,6 +27,7 @@ const GetTypebots = () => {
     }
   };
 };
+
 
 const GetshareBot = () =>{
   return async (req, res) => {

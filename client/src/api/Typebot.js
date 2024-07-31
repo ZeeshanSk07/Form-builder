@@ -22,8 +22,8 @@ const CreateTypebot = async (formName, selectedbtn, userId, parent) => {
 
 const GetTypebots = async(userId, parent) => {
   try {
-    const response = await axios.get(
-      `${Backend_Url}/typebot/getTypebots/${userId}`,
+    const response = await axios.get(`
+      ${Backend_Url}/typebot/getTypebots/${userId}`,
       { params: { parent } }
     );
     return response.data;
@@ -36,6 +36,7 @@ const GetTypebots = async(userId, parent) => {
     };
   }
 };
+
 
 const UpdateTypebot = async (typebotId, formName, selectedbtn) => {
   try {
