@@ -19,7 +19,7 @@ app.use(express.json());
 app.use(bodyParser.json());
 
 
-mongoose.connect(process.env.Mongo_Url)
+mongoose.connect(process.env.MONGO_URL)
     .then(() => {
         console.log('Database connected');
     })
@@ -36,7 +36,7 @@ app.use('/response', response);
 
 app.get('/health', (req, res) => {
     res.json({
-        message: 'Job listing API is working fine',
+        message: ' API is working fine',
         status: 'Working',
         date: new Date().toLocaleDateString()
     });
