@@ -3,7 +3,7 @@ const Backend_Url = 'http://localhost:4000';
 
 const CreateFolder = async (foldName, userId) => {
     try {
-        const response = await axios.post(`${Backend_Url}/createfolder`, { foldName, userId });
+        const response = await axios.post(`/createfolder`, { foldName, userId });
         return response;
     } catch (err) {
         return {
@@ -15,7 +15,7 @@ const CreateFolder = async (foldName, userId) => {
 
 const DeleteFolder = async (foltodel) => {
     try {
-        const response = await axios.delete(`${Backend_Url}/deletefolder/${foltodel}`);
+        const response = await axios.delete(`/deletefolder/${foltodel}`);
         return response;
     } catch (err) {
         return {
@@ -27,7 +27,7 @@ const DeleteFolder = async (foltodel) => {
 
 const GetFolders = async (userId) => {
     try {
-        const response = await axios.get(`${Backend_Url}/getfolders`, {
+        const response = await axios.get(`/getfolders`, {
             params: { userId }
         });
         return response.data;  // Assuming the response contains the folder data directly

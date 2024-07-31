@@ -7,18 +7,31 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const createTypebot = require('./routes/createTypebot.js');
 const response = require('./routes/response.js');
-const cookieParser = require('cookie-parser');
 const {verifyToken} = require('./middlewares/verifytoken.js');
+const path = require('path');
 dotenv.config();
 
+const Port = 4000;
 
 const app = express();
 app.use(cors());
-const Port = 4000;
+app.use(express.json());
 
-app.use(cookieParser()); 
+app.use(express.static(path.join(__dirname, 'public')));
+
+
 
 app.use(bodyParser.json());
+
+
+mongoose.connect(process.env.Mongo_Url)
+    .then(() => {
+        console.log('Database connected');
+    })
+    .catch(err => {
+        console.log('Error connecting to database:', err);
+});
+
 app.use('/user', user);
 app.use('/typebot', createTypebot);
 app.use('/', createfolder);
@@ -37,13 +50,7 @@ app.get('/health', (req, res) => {
     });
 })
 
-mongoose.connect(process.env.Mongo_Url)
-    .then(() => {
-        console.log('Database connected');
-    })
-    .catch(err => {
-        console.log('Error connecting to database:', err);
-    });
+
 
 app.use("*", (req, res) => {
     res.status(404).json({
