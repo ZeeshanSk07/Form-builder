@@ -4,7 +4,7 @@ const Backend_URL = 'http://localhost:4000';
 
 const getView = async (typebotId) => {
     try {
-      const response = await axios.get(`${Backend_URL}/response/getView/${typebotId}`);
+      const response = await axios.get(`/response/getView/${typebotId}`);
       console.log(response);
       return response;
       

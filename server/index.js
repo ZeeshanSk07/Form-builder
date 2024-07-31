@@ -9,6 +9,7 @@ const createTypebot = require('./routes/createTypebot.js');
 const response = require('./routes/response.js');
 const cookieParser = require('cookie-parser');
 const {verifyToken} = require('./middlewares/verifytoken.js');
+const path = require('path');
 dotenv.config();
 
 
@@ -17,6 +18,8 @@ app.use(cors());
 const Port = 4000;
 
 app.use(cookieParser()); 
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(bodyParser.json());
 app.use('/user', user);
