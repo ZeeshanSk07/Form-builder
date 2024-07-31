@@ -163,16 +163,17 @@ function Dashboard({
     <>
       <div className="dashboard">
         <div className="headbox">
-          <h3>
+          <h3 onClick={toggleDropdown}>
             <span>{currentUser.username}</span>'s workspace
             <img
-              onClick={toggleDropdown}
               style={{ cursor: "pointer" }}
               src={dropdown}
               alt="dropdown"
             />
-            {isDropdownVisible && (
-              <>
+            
+          </h3>
+          {isDropdownVisible && (
+              <div className="dropd">
                 <h3
                   onClick={() => navigate("/settings")}
                   className="dropdown-menu"
@@ -186,9 +187,8 @@ function Dashboard({
                 >
                   Logout
                 </h3>
-              </>
+              </div>
             )}
-          </h3>
         </div>
         <div className="strip">
           <div onClick={createFolderHandler} className="createform">
