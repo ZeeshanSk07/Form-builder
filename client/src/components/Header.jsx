@@ -61,7 +61,7 @@ function Header({
   };
 
   const shareTypebot = async() => {
-    const url = `https://localhost:3000/typebot/${typebotId}`;
+    const url = `https://form-builder-tau-ten.vercel.app/typebot/${typebotId}`;
     try {
       await navigator.clipboard.writeText(url);
       console.log("URL copied to clipboard");
